@@ -41,29 +41,41 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
         {images.map((img, i) => (
-          <button
+          <figure
             key={img.src}
-            type="button"
-            onClick={() => setActiveIdx(i)}
-            className="group relative overflow-hidden bg-[var(--border)]/30"
-            style={{ aspectRatio: `${img.width} / ${img.height}` }}
+            className="group break-inside-avoid mb-4 last:mb-0"
           >
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              loading="lazy"
-            />
-            {img.caption && (
-              <div className="absolute inset-x-0 bottom-0 p-3 text-left text-xs text-white bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                {img.caption}
-              </div>
+            <button
+              type="button"
+              onClick={() => setActiveIdx(i)}
+              aria-label={`Open ${img.alt}`}
+              className="relative block w-full overflow-hidden bg-[var(--border)]/30 cursor-zoom-in"
+              style={{ aspectRatio: `${img.width} / ${img.height}` }}
+            >
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                loading="lazy"
+              />
+            </button>
+            {(img.tags?.length || img.caption) && (
+              <figcaption className="mt-2 ml-1 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[11px] uppercase tracking-[0.14em] text-[var(--muted)] sm:opacity-70 sm:group-hover:opacity-100 transition-opacity">
+                {img.tags?.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+                {img.caption && (
+                  <span className="normal-case tracking-normal text-xs italic">
+                    {img.caption}
+                  </span>
+                )}
+              </figcaption>
             )}
-          </button>
+          </figure>
         ))}
       </div>
 
