@@ -1,19 +1,24 @@
 import Link from "next/link";
-import { personalInfo, projects } from "@/data/content";
+import {
+  personalInfo,
+  projects,
+  nowPlayingFallback,
+} from "@/data/content";
+import { NowPlaying } from "@/components/NowPlaying";
 
 export default function Home() {
   return (
     <div className="pt-20 md:pt-32 pb-16">
       <section className="max-w-4xl">
-        <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--muted)] mb-6">
-          Portfolio
-        </p>
         <h1 className="text-[44px] leading-[1.05] sm:text-6xl md:text-7xl lg:text-[80px] font-bold tracking-tight">
           {personalInfo.tagline}
         </h1>
         <p className="mt-8 max-w-2xl text-lg md:text-xl text-[var(--muted)] leading-relaxed">
           {personalInfo.about}
         </p>
+        <div className="mt-10">
+          <NowPlaying track={nowPlayingFallback} />
+        </div>
       </section>
 
       <section className="mt-24 md:mt-32 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">

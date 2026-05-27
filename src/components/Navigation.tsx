@@ -21,10 +21,9 @@ export function Navigation() {
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="text-base md:text-lg font-semibold tracking-tight"
+          className="text-sm sm:text-base md:text-lg font-semibold tracking-tight whitespace-nowrap"
         >
-          {personalInfo.shortName}
-          <span className="text-[var(--muted)]">.</span>
+          {personalInfo.name}
         </Link>
 
         <nav className="hidden md:block">
@@ -37,7 +36,7 @@ export function Navigation() {
                   <li key={item.href} className="relative">
                     <Link
                       href={item.href}
-                      className="group relative inline-block py-1 text-sm font-medium text-[var(--foreground)] hover:opacity-70 transition-opacity"
+                      className="group relative inline-block py-1 text-sm font-medium text-[var(--foreground)] transition-opacity"
                     >
                       {item.label}
                       {active ? (
@@ -51,7 +50,10 @@ export function Navigation() {
                           }}
                         />
                       ) : (
-                        <span className="pointer-events-none absolute left-0 right-0 -bottom-0.5 h-[2px] bg-[var(--foreground)] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                        <span
+                          className="pointer-events-none absolute left-0 right-0 -bottom-0.5 h-[2px] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
+                          style={{ backgroundColor: item.accent }}
+                        />
                       )}
                     </Link>
                   </li>
