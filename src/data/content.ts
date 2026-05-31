@@ -36,7 +36,16 @@ export interface GalleryImage {
 //   height: 1500,
 //   tags: ["cafe", "fujifilm"],
 // }
-export const gallery: GalleryImage[] = [];
+export const gallery: GalleryImage[] = [
+  {
+    src: "/gallery/85FB701C-4941-440A-A314-C6B566CABDD0_1_105_c.jpeg",
+    alt: "Cherry blossoms in bloom",
+    width: 1200,
+    height: 2000,
+    tags: ["spring", "summerchrome", "fujifilm"],
+  }
+
+];
 
 // TODO: Replace placeholder URLs.
 export const socialLinks = {
@@ -46,31 +55,43 @@ export const socialLinks = {
 };
 
 export const navItems = [
-  { href: "/", label: "Home", accent: "#1a1a1a" },
+  { href: "/", label: "Home", accent: "#93C5FD" }, // pastel blue
   { href: "/work", label: "Work", accent: "#F4A6A0" }, // coral
-  { href: "/about", label: "About", accent: "#93C5FD" }, // pastel blue
-  { href: "/gallery", label: "Gallery", accent: "#86EFAC" }, // pastel green
-  { href: "/contact", label: "Contact", accent: "#FCD34D" }, // pastel yellow
+  { href: "/about", label: "About", accent: "#FCD34D" }, // pastel yellow
+  { href: "/gallery", label: "Gallery", accent: "#A8D5B5" }, // muted mint
+  { href: "/contact", label: "Contact", accent: "#C4B5FD" }, // pastel lavender
 ] as const;
 
 export interface NowPlayingTrack {
   title: string;
   artist: string;
   album?: string;
-  albumColor: string;
+  albumColor?: string;
+  albumImage?: string;
+  isPlaying?: boolean;
   url?: string;
 }
 
-// TODO: Wire up Spotify Web API (/me/player/currently-playing) to replace static fallback.
-export const nowPlayingFallback: NowPlayingTrack = {
-  title: "Pink + White",
-  artist: "Frank Ocean",
-  album: "Blonde",
-  albumColor: "#F4A6A0",
-};
+// Messages shown when Spotify isn't returning a track (paused, away, or env vars missing).
+// One is picked at random server-side; rotates every ~60s with the page cache.
+export const awayMessages: string[] = [
+  "probably sleeping",
+  "probably playing volleyball",
+  "off the grid right now",
+  "currently vibing in silence",
+  "choosing my next obsession",
+];
 
 // TODO: Update seasonally. Used in the footer marquee.
 export const interests: string[] = [
-  "Volleyball",
+  "volleyball",
   "SEVENTEEN",
+  "dry malatang",
+  "Persona 3 Reload",
+  "mangoes",
+  "oolong tea",
+  "We Are All Trying Here",
+  "Project Hail Mary",
+  "'How to Pretend' by Lucy Bedroque",
+  "cafe-hopping",
 ];
