@@ -28,7 +28,24 @@ body {
   font-feature-settings: "ss01", "cv11";
 }
 
+/* Each page sets `--accent` on its outermost element so `::selection` inherits
+   the right color via CSS custom property cascade. */
 ::selection {
-  background: #1a1a1a;
-  color: #fafaf9;
+  background: var(--accent, #1a1a1a);
+  color: #1a1a1a;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
 }
