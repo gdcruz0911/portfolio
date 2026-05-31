@@ -7,14 +7,18 @@ export const metadata: Metadata = {
   description: personalInfo.about,
 };
 
+const ACCENT = "#FCD34D"; // pastel yellow
+
 export default function AboutPage() {
   return (
-    <div className="pb-16">
-      <PageHeader eyebrow="About" title="A little about me." />
+    <div
+      className="pb-16"
+      style={{ "--accent": ACCENT } as React.CSSProperties}
+    >
+      <PageHeader eyebrow="About" title="A little about me." accent={ACCENT} />
 
-      <section className="max-w-2xl text-lg leading-relaxed text-[var(--foreground)] space-y-6 border-t border-[var(--border)] pt-12">
-        <p>{personalInfo.about}</p>
-        <p className="text-[var(--muted)]">
+      <section className="max-w-2xl text-lg leading-relaxed text-[var(--foreground)] border-t border-[var(--border)] pt-12">
+        <p>
           I&rsquo;m currently studying at the University of Virginia and
           spending most of my free time learning the parts of the stack I
           don&rsquo;t know yet. If you&rsquo;re working on something

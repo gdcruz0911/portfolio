@@ -1,16 +1,22 @@
 export function PageHeader({
   eyebrow,
   title,
+  accent,
   children,
 }: {
   eyebrow?: string;
   title: string;
+  /** Optional hex color for the eyebrow text. Falls back to muted. */
+  accent?: string;
   children?: React.ReactNode;
 }) {
   return (
     <header className="pt-16 md:pt-24 pb-10 md:pb-16">
       {eyebrow && (
-        <p className="text-sm font-medium uppercase tracking-[0.18em] text-[var(--muted)] mb-4">
+        <p
+          className="text-sm font-medium uppercase tracking-[0.18em] mb-4"
+          style={{ color: accent ?? "var(--muted)" }}
+        >
           {eyebrow}
         </p>
       )}

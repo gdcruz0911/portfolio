@@ -11,9 +11,17 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(href + "/");
 }
 
+// Blue is the "home" default when no nav tab matches the current route.
+const DEFAULT_ACCENT = "#93C5FD";
+
 export function Navigation() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  // Brand-name period reflects whichever tab you're currently on.
+  const currentAccent =
+    navItems.find((item) => isActive(pathname, item.href))?.accent ??
+    DEFAULT_ACCENT;
 
   return (
     <header className="w-full border-b border-[var(--border)]">
@@ -24,6 +32,12 @@ export function Navigation() {
           className="text-sm sm:text-base md:text-lg font-semibold tracking-tight whitespace-nowrap"
         >
           {personalInfo.name}
+          <span
+            className="transition-colors"
+            style={{ color: currentAccent }}
+          >
+            .
+          </span>
         </Link>
 
         <nav className="hidden md:block">
@@ -42,7 +56,8 @@ export function Navigation() {
                       {active ? (
                         <motion.span
                           layoutId="nav-underline"
-                          className="absolute left-0 right-0 -bottom-0.5 h-[2px] bg-[var(--foreground)]"
+                          className="absolute left-0 right-0 -bottom-0.5 h-[2px]"
+                          style={{ backgroundColor: item.accent }}
                           transition={{
                             type: "spring",
                             stiffness: 380,
