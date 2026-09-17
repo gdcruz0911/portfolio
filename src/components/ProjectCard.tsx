@@ -1,44 +1,22 @@
+"use client";
+
+import { useState } from "react";
 import type { Project } from "@/data/content";
 
 export function ProjectCard({ project }: { project: Project }) {
+  const [failedVideo, setFailedVideo] = useState<string | null>(null);
   return (
-    <article className="group py-10 border-t border-[var(--border)] grid gap-6 md:grid-cols-[1fr_2fr]">
-      <div>
-        <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
-          {project.title}
-        </h3>
-        <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-[var(--muted)] uppercase tracking-wider">
-          {project.tech.map((t) => (
-            <li key={t}>{t}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="space-y-4">
-        <p className="text-lg text-[var(--foreground)] leading-relaxed">
-          {project.description}
-        </p>
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="font-medium underline underline-offset-4 decoration-1 hover:decoration-2"
-            >
-              Live demo →
-            </a>
-          )}
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="font-medium underline underline-offset-4 decoration-1 hover:decoration-2"
-            >
-              GitHub →
-            </a>
-          )}
-        </div>
+    <article className="py-8 border-t border-[var(--border)] space-y-4">
+      <h3 className="display-type text-4xl">{project.title}</h3>
+      <p className="leading-relaxed">{project.description}</p>
+      <ul className="flex flex-wrap gap-3 text-sm text-[var(--muted)]">{project.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>
+      {project.walkthrough && <div data-no-sparks>
+        <p className="text-sm">watch walkthrough</p>
+        {failedVideo === project.walkthrough ? <p role="status">the recording couldn&rsquo;t load. <a className="underline" href={project.walkthrough}>open the video directly</a></p> : <video key={project.walkthrough} className="project-video" src={project.walkthrough} controls playsInline preload="none" poster={project.poster} aria-label={`${project.title} walkthrough`} onError={() => setFailedVideo(project.walkthrough!)}>your browser doesn&rsquo;t support this video.</video>}
+      </div>}
+      <div className="flex flex-wrap gap-6">
+        {project.demo && <a className="text-link" href={project.demo} target="_blank" rel="noreferrer noopener">visit live site →</a>}
+        {project.github && <a className="text-link" href={project.github} target="_blank" rel="noreferrer noopener">source code →</a>}
       </div>
     </article>
   );

@@ -12,6 +12,8 @@ export interface Project {
   description: string;
   tech: string[];
   demo?: string;
+  walkthrough?: string;
+  poster?: string;
   github?: string;
 }
 
@@ -38,13 +40,41 @@ export interface GalleryImage {
 // }
 export const gallery: GalleryImage[] = [
   {
+    src: "/gallery/4FB0A59E-B4DE-4216-99B7-2AFE168D8942_1_105_c.jpeg",
+    alt: "Restaurant patio lit by warm string lights at night",
+    width: 724,
+    height: 1086,
+  },
+  {
+    src: "/gallery/6F809C5E-1824-4049-91DB-FF4794F74F6F_1_105_c.jpeg",
+    alt: "Glass high-rise viewed from the street against a blue sky",
+    width: 724,
+    height: 1086,
+  },
+  {
+    src: "/gallery/8240FC1B-6D87-4DA9-84F9-2C75FD849F8D_4_5005_c.jpeg",
+    alt: "Reflecting pool between pale modern buildings on an overcast day",
+    width: 360,
+    height: 540,
+  },
+  {
     src: "/gallery/85FB701C-4941-440A-A314-C6B566CABDD0_1_105_c.jpeg",
     alt: "Cherry blossoms in bloom",
-    width: 1200,
-    height: 2000,
-    tags: ["spring", "summerchrome", "fujifilm"],
-  }
-
+    width: 724,
+    height: 1086,
+  },
+  {
+    src: "/gallery/B39745DA-C0BD-43E7-AED0-3CB064E32E59_4_5005_c.jpeg",
+    alt: "Waterfront with small boats and a distant ferris wheel",
+    width: 360,
+    height: 450,
+  },
+  {
+    src: "/gallery/DE75A9CC-95B6-4044-88AC-440FC257D8AE_1_105_c.jpeg",
+    alt: "Pink roses in warm afternoon sunlight",
+    width: 724,
+    height: 1086,
+  },
 ];
 
 // TODO: Replace placeholder URLs.
@@ -55,11 +85,10 @@ export const socialLinks = {
 };
 
 export const navItems = [
-  { href: "/", label: "Home", accent: "#93C5FD" }, // pastel blue
-  { href: "/work", label: "Work", accent: "#F4A6A0" }, // coral
-  { href: "/about", label: "About", accent: "#FCD34D" }, // pastel yellow
-  { href: "/gallery", label: "Gallery", accent: "#A8D5B5" }, // muted mint
-  { href: "/contact", label: "Contact", accent: "#C4B5FD" }, // pastel lavender
+  { href: "/", label: "Home", accent: "#75bce9" },
+  { href: "/work", label: "Work", accent: "#75bce9" },
+  { href: "/about", label: "About", accent: "#75bce9" },
+  { href: "/gallery", label: "Gallery", accent: "#75bce9" },
 ] as const;
 
 export interface NowPlayingTrack {

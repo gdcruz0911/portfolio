@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter, Caveat } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { Marquee } from "@/components/Marquee";
-import { personalInfo, interests } from "@/data/content";
+import { MotionProvider } from "@/components/MotionProvider";
+import { personalInfo } from "@/data/content";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,8 +12,17 @@ const inter = Inter({
   display: "swap",
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const signature = Caveat({ subsets: ["latin"], variable: "--font-signature", display: "swap" });
+
 export const metadata: Metadata = {
-  title: `${personalInfo.name} — ${personalInfo.tagline}`,
+  title: `${personalInfo.name} - ${personalInfo.tagline}`,
   description: personalInfo.about,
 };
 
@@ -23,14 +32,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen flex flex-col">
-        <Navigation />
-        <main className="flex-1 w-full max-w-6xl mx-auto px-6 md:px-10 lg:px-14">
-          {children}
-        </main>
-        <Marquee items={interests} label="currently obsessed with" />
-        <Footer />
+    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${signature.variable}`}>
+      <body>
+        <MotionProvider>
+          <a href="#main-content" className="skip-link">skip to content</a>
+          <div className="site-shell">
+            <Navigation />
+            <main id="main-content" tabIndex={-1}>{children}</main>
+          </div>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

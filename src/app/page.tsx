@@ -1,74 +1,38 @@
+import { ContactSection } from "@/components/ContactSection";
+import Image from "next/image";
 import Link from "next/link";
-import { personalInfo, projects, awayMessages } from "@/data/content";
+import { projects } from "@/data/content";
 import { NowPlaying } from "@/components/NowPlaying";
-import { getNowPlaying } from "@/lib/spotify";
+import { ProjectCard } from "@/components/ProjectCard";
 
-// Re-fetch the now-playing track at most once per minute.
-export const revalidate = 60;
-
-// Home's identity color — used everywhere on this page.
-const ACCENT = "#93C5FD"; // pastel blue
-
-// Split the tagline on its trailing punctuation so we can color it.
-const taglineMatch = personalInfo.tagline.match(/^(.*?)([.!?…]+)$/);
-const taglineMain = taglineMatch?.[1] ?? personalInfo.tagline;
-const taglinePunct = taglineMatch?.[2] ?? "";
-
-export default async function Home() {
-  const live = await getNowPlaying();
-  const widget = live
-    ? ({ mode: "playing", track: live } as const)
-    : ({
-        mode: "away",
-        message:
-          awayMessages[Math.floor(Math.random() * awayMessages.length)] ??
-          awayMessages[0],
-      } as const);
+export default function Home() {
   return (
-    <div
-      className="pt-20 md:pt-32 pb-16"
-      style={{ "--accent": ACCENT } as React.CSSProperties}
-    >
-      <section className="max-w-4xl">
-        <h1 className="text-[44px] leading-[1.05] sm:text-6xl md:text-7xl lg:text-[80px] font-bold tracking-tight">
-          {taglineMain}
-          <span style={{ color: ACCENT }}>{taglinePunct}</span>
-        </h1>
-        <p className="mt-8 max-w-2xl text-lg md:text-xl text-[var(--muted)] leading-relaxed">
-          {personalInfo.about}
-        </p>
-        <div className="mt-10">
-          <NowPlaying {...widget} />
-        </div>
-      </section>
-
-      <section className="mt-24 md:mt-32 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-        <div>
-          <p
-            className="text-sm font-medium uppercase tracking-[0.18em] mb-3"
-            style={{ color: ACCENT }}
-          >
-            Selected Work
-          </p>
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
-            {projects.length > 0
-              ? "Recent projects"
-              : "Projects are on the way."}
-          </h2>
-        </div>
-        <Link
-          href="/work"
-          className="group inline-flex items-center gap-2 text-sm font-medium"
-        >
-          <span className="relative">
-            See all work
-            <span className="absolute left-0 right-0 -bottom-0.5 h-px bg-[var(--foreground)] group-hover:bg-[#93C5FD] transition-colors duration-200" />
-          </span>
-          <span className="transition-transform group-hover:translate-x-1">
-            →
-          </span>
-        </Link>
-      </section>
+    <div className="home-page">
+      <header className="home-intro">
+        <h1 className="display-type">hi, i&rsquo;m gabriel<span className="coral">.</span></h1>
+        <p>uva student and aspiring full-stack developer.<br />i build websites and enjoy photography.</p>
+        <Link href="/work" className="text-link intro-link">view my work <span aria-hidden>→</span></Link>
+      </header>
+      <div className="home-grid">
+        <section className="paper-panel projects-panel" aria-labelledby="projects-title">
+          <span className="section-dot coral-bg" aria-hidden />
+          <h2 id="projects-title" className="display-type">projects</h2>
+          {projects.length ? <ProjectCard project={projects[0]} /> : <>
+            <Image src="/art/landscape.webp" alt="" width={900} height={300} sizes="(min-width: 900px) 40vw, 90vw" className="project-landscape" />
+            <p className="display-type coming-soon">projects coming soon.</p>
+          </>}
+          <Link href="/work" className="text-link">view work <span aria-hidden>→</span></Link>
+        </section>
+        <section className="paper-panel listening-panel" aria-label="Spotify listening status"><NowPlaying /></section>
+        <section className="paper-panel photography-panel" aria-labelledby="photography-title">
+          <h2 id="photography-title" className="display-type"><span className="section-dot moss-bg" aria-hidden />photography</h2>
+          <Link href="/gallery" className="photo-preview" aria-label="view photography gallery">
+            <Image src="/gallery/85FB701C-4941-440A-A314-C6B566CABDD0_1_105_c.jpeg" alt="Cherry blossoms in bloom against a blue sky" fill priority sizes="(min-width: 900px) 35vw, 90vw" className="object-cover" />
+          </Link>
+          <Link href="/gallery" className="text-link">view gallery <span aria-hidden>→</span></Link>
+        </section>
+      </div>
+      <ContactSection />
     </div>
   );
 }

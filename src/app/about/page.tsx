@@ -1,3 +1,4 @@
+import { ContactSection } from "@/components/ContactSection";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { personalInfo } from "@/data/content";
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   description: personalInfo.about,
 };
 
-const ACCENT = "#FCD34D"; // pastel yellow
+const ACCENT = "#1763a0";
 
 export default function AboutPage() {
   return (
@@ -19,33 +20,34 @@ export default function AboutPage() {
 
       <section className="max-w-2xl text-lg leading-relaxed text-[var(--foreground)] border-t border-[var(--border)] pt-12">
         <p>
-          I&rsquo;m currently studying at the University of Virginia and
-          spending most of my free time learning the parts of the stack I
-          don&rsquo;t know yet. If you&rsquo;re working on something
+          i&rsquo;m currently studying at the university of virginia and
+          spending most of my free time learning the parts of the stack i
+          don&rsquo;t know yet. if you&rsquo;re working on something
           interesting or just want to chat, my inbox is open.
         </p>
       </section>
 
       <section className="mt-20 grid gap-12 md:grid-cols-3 border-t border-[var(--border)] pt-12">
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--muted)] mb-3">
-            Currently
+          <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)] mb-3">
+            currently
           </p>
-          <p>Studying at the University of Virginia</p>
+          <p>studying at the university of virginia</p>
         </div>
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--muted)] mb-3">
-            Building with
+          <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)] mb-3">
+            building with
           </p>
           <p>TypeScript, React, Next.js, Python</p>
         </div>
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--muted)] mb-3">
-            Off the keyboard
+          <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)] mb-3">
+            off the keyboard
           </p>
-          <p>Cafés, film photography, volleyball</p>
+          <p>cafés, film photography, volleyball</p>
         </div>
       </section>
+      <ContactSection />
     </div>
   );
 }

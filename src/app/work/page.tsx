@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Selected projects.",
 };
 
-const ACCENT = "#F4A6A0"; // coral
+const ACCENT = "#1763a0";
 
 export default function WorkPage() {
   return (
@@ -17,14 +17,14 @@ export default function WorkPage() {
       style={{ "--accent": ACCENT } as React.CSSProperties}
     >
       <PageHeader eyebrow="Selected work" title="Work" accent={ACCENT}>
-        A handful of things I&rsquo;ve built, from school projects to weekend
+        a handful of things i&rsquo;ve built, from school projects to weekend
         experiments.
       </PageHeader>
 
       {projects.length === 0 ? (
         <div className="border-t border-[var(--border)] py-24 text-center">
           <p className="text-[var(--muted)]">
-            Projects coming soon. Check back later.
+            projects coming soon.
           </p>
         </div>
       ) : (
