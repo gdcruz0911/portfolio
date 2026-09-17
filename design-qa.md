@@ -106,3 +106,17 @@ It is 220px wide on desktop and grows to 78vw (maximum 340px) on mobile.
 The footer animation pauses when offscreen and becomes static under reduced motion.
 Pointer and keyboard activation produce a brief response with a live announcement.
 Independent source review found no blocking issues; its screen-reader label suggestion was applied.
+
+
+## Homepage refinement - 2026-09-17
+
+Reproduced the 24px rounded sidebar corner and 516px-tall homepage photo at a 1600px viewport.
+The sidebar now meets the footer with square corners, and the plant enters from the top-left corner.
+Photography is a small tilted postcard; projects have the primary panel, with Spotify beside them.
+LinkedIn, GitHub, and email links appear beneath the introduction with 44px touch targets.
+One low-opacity, non-repeating paper layer replaces repeated panel and footer textures.
+
+Browser checks at 1600px, 800px, and 390px confirmed the revised composition and no horizontal overflow.
+At 390px, Spotify and projects both occupy the full 335px content width.
+Independent review identified narrow-screen sizing risks; the mobile alignment and tablet postcard sizing were corrected and checked in the browser.
+Desktop evidence: `/tmp/portfolio-v2-qa/home-refined-desktop.png`.
