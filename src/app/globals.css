@@ -162,21 +162,19 @@ a.track:hover p:first-child { text-decoration: underline; }
 .about-notes > div { padding-bottom: 26px; }
 .about-notes h2 { margin-bottom: 6px; }
 
-/* Gallery: scrolling down drifts a strip of scattered prints sideways. */
-.drift { height: 260vh; width: 100vw; margin-left: calc(50% - 50vw); view-timeline: --drift; }
-.drift-view { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
-.drift-track { flex: none; display: flex; align-items: center; gap: 7vw; width: max-content; padding: 0 12vw; animation: drift-strip linear both; animation-timeline: --drift; animation-range: contain; }
-.print { rotate: var(--tilt); translate: 0 var(--y); animation: print-sway 6s ease-in-out infinite; animation-delay: var(--delay); }
-.print img { display: block; width: auto; max-width: none; height: var(--h); box-shadow: 0 14px 30px -20px rgb(47 79 111 / .55); transition: transform .4s ease, box-shadow .4s ease; }
-.print:hover img { transform: translateY(-8px) rotate(calc(var(--tilt) * -1)); box-shadow: 0 22px 36px -22px rgb(47 79 111 / .6); }
-@keyframes drift-strip { from { transform: translateX(0); } to { transform: translateX(calc(-100% + 100vw)); } }
+/* Gallery: a strip of scattered prints. With JS (data-drift) the section is tall and
+   the strip drifts sideways as you scroll; otherwise it is a native sideways-scrolling row. */
+.drift { width: 100vw; margin-left: calc(50% - 50vw); }
+.drift-view { overflow-x: auto; scroll-snap-type: x mandatory; padding: 8vh 0 10vh; }
+.drift[data-drift] .drift-view { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; padding: 0; }
+.drift-track { flex: none; display: flex; align-items: center; gap: 7vw; width: max-content; padding: 0 12vw; will-change: transform; }
+.print { rotate: var(--tilt); translate: 0 var(--y); scroll-snap-align: center; animation: print-sway 6s ease-in-out infinite; animation-delay: var(--delay); }
+.print img { display: block; width: auto; max-width: none; height: var(--h); box-shadow: 0 14px 30px -20px rgb(47 79 111 / .55); transition: transform .4s ease; }
+.print:hover img { transform: translateY(-8px) rotate(calc(var(--tilt) * -1)); }
+.print figcaption { margin-top: 12px; font-size: 11px; }
+.print figcaption b { font-weight: 400; color: var(--foreground); margin-right: 6px; }
 @keyframes print-sway { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
-@supports not (animation-timeline: view()) {
-  .drift { height: auto; }
-  .drift-view { position: static; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10vh 0; }
-  .drift-track { animation: none; }
-  .print { scroll-snap-align: center; }
-}
+.page-header .issue { margin-top: 12px; }
 
 /* 404 */
 .lost { display: grid; justify-items: center; text-align: center; padding: 30px 0 20px; }
@@ -243,7 +241,4 @@ a.track:hover p:first-child { text-decoration: underline; }
   .sleep-marks i:nth-child(2) { transform: translate(12px, -18px); }
   .sleep-marks i:nth-child(3) { transform: translate(24px, -36px); }
   .wind { display: none; }
-  .drift { height: auto; }
-  .drift-view { position: static; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10vh 0; }
-  .print { scroll-snap-align: center; }
 }
