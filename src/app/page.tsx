@@ -23,7 +23,6 @@ export default function Home() {
         <section className="paper-panel projects-panel" aria-labelledby="projects-title">
           <span className="section-dot coral-bg" aria-hidden />
           <h2 id="projects-title" className="display-type">projects</h2>
-          <Image src="/art/landscape.webp" alt="" width={900} height={300} loading="eager" sizes="(min-width: 900px) 40vw, 90vw" className="project-landscape" />
           {projects.length ? <div className="selected-project">
             <h3 className="display-type">{projects[0].title}</h3>
             <p>{projects[0].description}</p>

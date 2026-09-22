@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, DM_Sans, Caveat } from "next/font/google";
+import { Source_Serif_4, DM_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -12,7 +12,7 @@ const bodyFont = DM_Sans({
   display: "swap",
 });
 
-const displayFont = Fraunces({
+const displayFont = Source_Serif_4({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["400", "500", "600", "700"],
