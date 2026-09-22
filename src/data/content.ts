@@ -12,6 +12,7 @@ export interface Project {
   description: string;
   tech: string[];
   demo?: string;
+  preview?: { src: string; width: number; height: number };
   walkthrough?: string;
   poster?: string;
   github?: string;
@@ -20,6 +21,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "mahjong club at uva",
+    preview: { src: "/projects/mahjong.jpg", width: 1400, height: 570 },
     description: "a website for the mahjong club at uva, with meeting information and club updates. officers can propose content changes through Google Sheets, with reviewed updates published through GitHub Pages.",
     tech: ["Next.js", "React", "TypeScript", "Python", "GitHub Pages"],
     demo: "https://mahjongclub-uva.github.io/mahjongclub-site/",
@@ -27,6 +29,7 @@ export const projects: Project[] = [
   },
   {
     title: "personal portfolio",
+    preview: { src: "/projects/portfolio.jpg", width: 1400, height: 740 },
     description: "a home for my projects, photographs, and a little of what i enjoy. built with responsive layouts, a Spotify now-playing widget, and a sleeping otter.",
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     demo: "/",

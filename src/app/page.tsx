@@ -1,48 +1,40 @@
 import { ContactSection } from "@/components/ContactSection";
+import { CoverFlourish, CoverReveal } from "@/components/CoverFlourish";
 import Image from "next/image";
 import Link from "next/link";
-import { projects, socialLinks } from "@/data/content";
+import { projects, socialLinks, gallery } from "@/data/content";
 import { NowPlaying } from "@/components/NowPlaying";
 
 export default function Home() {
-  return (
-    <div className="home-page">
-      <header className="home-intro">
-        <h1 className="display-type">hi, i&rsquo;m gabriel<span className="coral">.</span></h1>
-        <p>uva student and aspiring full-stack developer.<br />i build websites and enjoy photography.</p>
-        <div className="intro-actions">
-          <Link href="/projects" className="text-link intro-link">view my projects <span aria-hidden>→</span></Link>
-          <nav className="intro-socials" aria-label="connect with gabriel">
-            <a href={socialLinks.linkedin} target="_blank" rel="noreferrer noopener">linkedin <span aria-hidden>↗</span></a>
-            <a href={socialLinks.github} target="_blank" rel="noreferrer noopener">github <span aria-hidden>↗</span></a>
-            <a href={socialLinks.email}>email <span aria-hidden>↗</span></a>
-          </nav>
+  return <div className="home-page">
+    <header className="magazine-cover">
+      <div className="edition-line"><span>a personal collection</span><span>code / photographs / everyday things</span></div>
+      <CoverReveal>
+        <div className="cover-copy">
+          <p className="signature cover-greeting">hello, i’m</p>
+          <h1 className="display-type">gabriel<span className="coral">.</span></h1>
+          <p className="cover-description">a student at uva, building websites<br className="desktop-break" /> and finding things worth keeping.</p>
+          <Link href="/projects" className="text-link">explore my projects <span aria-hidden>↗</span></Link>
         </div>
-      </header>
-      <div className="home-grid">
-        <section className="paper-panel projects-panel" aria-labelledby="projects-title">
-          <span className="section-dot coral-bg" aria-hidden />
-          <h2 id="projects-title" className="display-type">projects</h2>
-          {projects.length ? <div className="selected-project">
-            <h3 className="display-type">{projects[0].title}</h3>
-            <p>{projects[0].description}</p>
-          </div> : <p className="display-type coming-soon">projects coming soon.</p>}
-          <Link href="/projects" className="text-link">all projects <span aria-hidden>→</span></Link>
-        </section>
-        <section className="paper-panel listening-panel" aria-label="Spotify listening status"><NowPlaying /></section>
-        <section className="photography-panel" aria-labelledby="photography-title">
-          <Link href="/gallery" className="photo-postcard" aria-label="view photography gallery">
-            <span className="photo-preview">
-              <Image src="/gallery/85FB701C-4941-440A-A314-C6B566CABDD0_1_105_c.jpeg" alt="Cherry blossoms in bloom against a blue sky" fill sizes="120px" className="object-cover" />
-            </span>
-            <span>
-              <span id="photography-title" className="signature photo-note">a few little moments</span>
-              <span className="photo-gallery-link">view gallery <span aria-hidden>↗</span></span>
-            </span>
-          </Link>
-        </section>
-      </div>
-      <ContactSection />
-    </div>
-  );
+        <CoverFlourish />
+      </CoverReveal>
+      <nav className="cover-socials" aria-label="connect with gabriel">
+        <span>let’s connect</span>
+        <a href={socialLinks.github} target="_blank" rel="noreferrer noopener">github ↗</a>
+        <a href={socialLinks.linkedin} target="_blank" rel="noreferrer noopener">linkedin ↗</a>
+        <a href={socialLinks.email}>email ↗</a>
+      </nav>
+    </header>
+    <section className="home-projects" aria-labelledby="projects-title">
+      <div className="section-heading"><p className="print-label">01 / made on a keyboard</p><h2 id="projects-title" className="display-type">things i’m building.</h2></div>
+      {projects.map((project, index) => <Link href="/projects" className="project-index-entry" key={project.title}>
+        <span className="project-number">0{index + 1}</span><div><h3 className="display-type">{project.title}</h3><p>{project.tech.slice(0, 3).join(' / ')}</p></div><span className="project-index-arrow" aria-hidden>↗</span>
+      </Link>)}
+    </section>
+    <section className="everyday-spread" aria-labelledby="everyday-title">
+      <div className="everyday-copy"><p className="print-label">02 / away from the keyboard</p><h2 id="everyday-title" className="display-type">a softer<br />side of things.</h2><p>photographs, café stops, and whatever’s on repeat.</p><Link className="text-link" href="/gallery">open the anthology ↗</Link><div className="home-listening"><NowPlaying /></div></div>
+      <Link href="/gallery" className="anthology-preview" aria-label="explore the photo anthology"><Image src={gallery[3].src} alt={gallery[3].alt} width={724} height={1086} sizes="(max-width: 760px) 85vw, 40vw" /><span className="signature">little things, kept close.</span></Link>
+    </section>
+    <ContactSection />
+  </div>;
 }

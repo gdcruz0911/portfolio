@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -31,7 +30,6 @@ export function Navigation() {
           <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined} onClick={() => setOpen(false)}>{item.label.toLowerCase()}</Link>
         ))}
       </nav>
-      <Image src="/art/pothos.webp" alt="" width={320} height={800} className="sidebar-plant" sizes="180px" loading="eager" />
     </header>
   );
 }

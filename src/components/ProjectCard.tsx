@@ -1,12 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import type { Project } from "@/data/content";
 
 export function ProjectCard({ project }: { project: Project }) {
   const [failedVideo, setFailedVideo] = useState<string | null>(null);
   return (
-    <article className="py-8 border-t border-[var(--border)] space-y-4">
+    <article className="project-feature space-y-4">
+      {project.preview && <Image className="project-screenshot" src={project.preview.src} alt={`${project.title} homepage preview`} width={project.preview.width} height={project.preview.height} sizes="(max-width: 760px) 90vw, 920px" />}
       <h2 className="display-type text-4xl">{project.title}</h2>
       <p className="leading-relaxed">{project.description}</p>
       <ul className="flex flex-wrap gap-3 text-sm text-[var(--muted)]">{project.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>

@@ -22,12 +22,12 @@ export function Marquee({
   return (
     <section
       aria-label={label ?? "Currently obsessed with"}
-      className="w-full border-y border-[var(--border)] bg-white/40 py-4 mt-24 md:mt-32"
+      className="w-full border-y border-[var(--border)] bg-[var(--surface)] py-4 mt-24 md:mt-32"
     >
       <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-14 flex items-center gap-4">
         {label && (
           <span className="shrink-0 text-sm text-[var(--muted)] italic">
-            {label} —
+            {label}
           </span>
         )}
         <div
