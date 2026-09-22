@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects, socialLinks } from "@/data/content";
 import { NowPlaying } from "@/components/NowPlaying";
-import { ProjectCard } from "@/components/ProjectCard";
 
 export default function Home() {
   return (
@@ -12,7 +11,7 @@ export default function Home() {
         <h1 className="display-type">hi, i&rsquo;m gabriel<span className="coral">.</span></h1>
         <p>uva student and aspiring full-stack developer.<br />i build websites and enjoy photography.</p>
         <div className="intro-actions">
-          <Link href="/work" className="text-link intro-link">view my work <span aria-hidden>→</span></Link>
+          <Link href="/projects" className="text-link intro-link">view my projects <span aria-hidden>→</span></Link>
           <nav className="intro-socials" aria-label="connect with gabriel">
             <a href={socialLinks.linkedin} target="_blank" rel="noreferrer noopener">linkedin <span aria-hidden>↗</span></a>
             <a href={socialLinks.github} target="_blank" rel="noreferrer noopener">github <span aria-hidden>↗</span></a>
@@ -24,11 +23,12 @@ export default function Home() {
         <section className="paper-panel projects-panel" aria-labelledby="projects-title">
           <span className="section-dot coral-bg" aria-hidden />
           <h2 id="projects-title" className="display-type">projects</h2>
-          {projects.length ? <ProjectCard project={projects[0]} /> : <>
-            <Image src="/art/landscape.webp" alt="" width={900} height={300} sizes="(min-width: 900px) 40vw, 90vw" className="project-landscape" />
-            <p className="display-type coming-soon">projects coming soon.</p>
-          </>}
-          <Link href="/work" className="text-link">view work <span aria-hidden>→</span></Link>
+          <Image src="/art/landscape.webp" alt="" width={900} height={300} loading="eager" sizes="(min-width: 900px) 40vw, 90vw" className="project-landscape" />
+          {projects.length ? <div className="selected-project">
+            <h3 className="display-type">{projects[0].title}</h3>
+            <p>{projects[0].description}</p>
+          </div> : <p className="display-type coming-soon">projects coming soon.</p>}
+          <Link href="/projects" className="text-link">all projects <span aria-hidden>→</span></Link>
         </section>
         <section className="paper-panel listening-panel" aria-label="Spotify listening status"><NowPlaying /></section>
         <section className="photography-panel" aria-labelledby="photography-title">

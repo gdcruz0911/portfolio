@@ -17,8 +17,15 @@ export interface Project {
   github?: string;
 }
 
-// TODO: Replace with real projects.
-export const projects: Project[] = [];
+export const projects: Project[] = [
+  {
+    title: "personal portfolio",
+    description: "a home for my projects, photographs, and a little of what i enjoy. built with responsive layouts, a Spotify now-playing widget, and a sleeping otter.",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    demo: "/",
+    github: "https://github.com/gdcruz0911/portfolio",
+  },
+];
 
 export interface GalleryImage {
   src: string;
@@ -86,7 +93,7 @@ export const socialLinks = {
 
 export const navItems = [
   { href: "/", label: "Home", accent: "#75bce9" },
-  { href: "/work", label: "Work", accent: "#75bce9" },
+  { href: "/projects", label: "Projects", accent: "#75bce9" },
   { href: "/about", label: "About", accent: "#75bce9" },
   { href: "/gallery", label: "Gallery", accent: "#75bce9" },
 ] as const;

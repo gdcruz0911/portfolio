@@ -120,3 +120,14 @@ Browser checks at 1600px, 800px, and 390px confirmed the revised composition and
 At 390px, Spotify and projects both occupy the full 335px content width.
 Independent review identified narrow-screen sizing risks; the mobile alignment and tablet postcard sizing were corrected and checked in the browser.
 Desktop evidence: `/tmp/portfolio-v2-qa/home-refined-desktop.png`.
+
+
+## Reference palette and projects - 2026-09-17
+
+Restored stronger sidebar blue, dark blue footer, bold serif headings, and restrained blue/coral circles from the supplied reference.
+Lowercase copy, top social links, the corner plant, sleeping otter, and compact photography postcard remain.
+The portfolio is now a real project with a live-site link and the existing repository URL.
+Navigation and headings use projects; `/work` redirects to `/projects`.
+Browser checks confirmed the redirect, links, and mobile projects layout without horizontal overflow.
+The gallery is unchanged while the owner selects a replacement.
+Independent code review found no blocking issues.

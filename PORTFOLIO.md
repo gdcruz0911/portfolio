@@ -29,7 +29,7 @@ Videos use native controls without autoplay and load only when requested.
 Use captioned recordings or provide an accompanying transcript when the recording includes speech.
 
 Gallery entries keep their image dimensions and descriptive alternative text.
-The initial project list is intentionally empty.
+The portfolio itself is the first project; add further real projects as they are ready.
 
 ## Artwork
 
