@@ -34,8 +34,10 @@ The mahjong club website and portfolio are listed as projects; add further real 
 ## Artwork
 
 The selected WebP files in `public/art` are original generated illustrations and texture made for this design.
-The furin, earbuds and media player, wind, brushstrokes, and 404 vines are inline SVG placeholders meant to be replaced with hand-drawn versions: draw black on a transparent PNG, then trace to SVG (e.g. `potrace`) and use `currentColor` for strokes.
+The furin, pencil earbuds, pinwheel, wind and leaves, brushstrokes, and 404 vines are inline SVG placeholders meant to be replaced with hand-drawn versions: draw black on a transparent PNG, then trace to SVG (e.g. `potrace`) and use `currentColor` for strokes.
 Reference artwork and brand packaging were used as visual inspiration, not copied into the site.
 The cursive name is currently rendered in Caveat and can later be replaced with your signature.
 
 See `design-qa.md` for the verification record and remaining manual checks.
+
+The resume served at `/resume.pdf` is a copy of `~/Documents/Resumes/Jean_Gabriel_Dela_Cruz.pdf`; replace `public/resume.pdf` when it changes.
