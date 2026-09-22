@@ -99,6 +99,7 @@ export const socialLinks = {
   github: "https://github.com/gdcruz0911",
   linkedin: "https://www.linkedin.com/in/jgdcruz/",
   email: "mailto:jgdcruz1179@gmail.com",
+  resume: "/resume.pdf",
 };
 
 export const navItems = [

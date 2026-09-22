@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Brushstroke } from "@/components/Brushstroke";
-import { navItems, personalInfo } from "@/data/content";
+import { navItems, personalInfo, socialLinks } from "@/data/content";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -30,6 +30,7 @@ export function Navigation() {
         {navItems.map((item) => (
           <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined} onClick={() => setOpen(false)}>{item.label}{pathname === item.href && <Brushstroke />}</Link>
         ))}
+        <a href={socialLinks.resume} target="_blank" rel="noopener">resume ↗</a>
       </nav>
     </header>
   );
