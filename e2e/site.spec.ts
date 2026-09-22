@@ -88,6 +88,15 @@ test.describe("navigation", () => {
     await expect(page.locator("#contact")).toContainText("crafted with love");
   });
 
+  test("the pinwheel favicon is served", async ({ page, request }) => {
+    await page.goto("/", { waitUntil: "networkidle" });
+    for (const selector of ['link[rel="icon"][type="image/svg+xml"]', 'link[rel="apple-touch-icon"]']) {
+      const href = await page.locator(selector).getAttribute("href");
+      expect((await request.get(href!)).status(), selector).toBe(200);
+    }
+    expect((await request.get("/favicon.ico")).status()).toBe(200);
+  });
+
   test("unknown routes show the overgrown 404", async ({ page }) => {
     const response = await page.goto("/this-does-not-exist", { waitUntil: "networkidle" });
     expect(response?.status()).toBe(404);
