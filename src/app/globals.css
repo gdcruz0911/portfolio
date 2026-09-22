@@ -183,9 +183,13 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
 .lost .signature { font-size: 26px; }
 
 /* Ambient wind on inner pages */
-.wind { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; color: var(--foreground); opacity: .08; }
-.wind svg { position: absolute; width: 420px; height: auto; animation: drift linear infinite; }
+.wind { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; color: var(--foreground); }
+.wind > svg { position: absolute; width: 420px; height: auto; opacity: .08; animation: drift linear infinite; }
 .wind path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.wind .leaf { position: absolute; left: 0; width: 22px; animation: drift linear infinite; }
+.wind .leaf svg { display: block; width: 100%; height: auto; opacity: .55; color: var(--sage); animation: tumble 5s ease-in-out infinite; }
+.wind .leaf path { fill: currentColor; stroke: var(--background); stroke-width: .8; }
+@keyframes tumble { 0%, 100% { transform: translateY(0) rotate(-20deg); } 50% { transform: translateY(24px) rotate(160deg); } }
 @keyframes drift { from { transform: translateX(-40vw); } to { transform: translateX(140vw); } }
 
 /* Click sparks */
