@@ -20,6 +20,7 @@
 
 /* Base */
 html { -webkit-font-smoothing: antialiased; }
+body { overflow-x: clip; }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-body), sans-serif; font-size: 16px; line-height: 1.6; }
 body::before { content: ""; position: fixed; inset: 0; z-index: 100; pointer-events: none; opacity: .085; background: url('/art/paper-grain.webp') center / cover no-repeat; }
 button, a { -webkit-tap-highlight-color: transparent; }
@@ -153,20 +154,21 @@ a.player-screen:hover p:first-child { text-decoration: underline; }
 .about-notes > div { padding-bottom: 26px; }
 .about-notes h2 { margin-bottom: 6px; }
 
-/* Gallery */
-.gallery-controls { padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
-.anthology-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 38px 28px; align-items: start; }
-.photo-print { border: 1px solid var(--border); background: var(--surface); padding: 8px; width: 100%; transition: transform .25s; }
-.photo-print:nth-child(3n + 2) { margin-top: 65px; }
-.photo-print:hover { transform: translateY(-5px); }
-.photo-print img { width: 100%; height: auto; }
-.gallery-dialog { margin: auto; padding: 0; border: 1px solid var(--border); border-radius: 12px; width: min(92vw, 1000px); max-height: 90dvh; color: var(--foreground); background: var(--surface); }
-.gallery-dialog::backdrop { background: rgb(47 79 111 / .5); backdrop-filter: blur(6px); }
-.viewer-controls { display: flex; align-items: center; gap: 12px; padding: 12px 18px; }
-.viewer-controls button { min-width: 48px; min-height: 48px; border: 1px solid var(--border); border-radius: 50%; font-size: 22px; }
-.viewer-controls button:first-child { font-size: 15px; border: 0; border-radius: 0; }
-.viewer-controls span { margin-right: auto; }
-.viewer-image { width: 100%; height: 72dvh; object-fit: contain; padding: 12px; }
+/* Gallery: scrolling down drifts a strip of scattered prints sideways. */
+.drift { height: 260vh; width: 100vw; margin-left: calc(50% - 50vw); view-timeline: --drift; }
+.drift-view { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
+.drift-track { flex: none; display: flex; align-items: center; gap: 7vw; width: max-content; padding: 0 12vw; animation: drift-strip linear both; animation-timeline: --drift; animation-range: contain; }
+.print { rotate: var(--tilt); translate: 0 var(--y); animation: print-sway 6s ease-in-out infinite; animation-delay: var(--delay); }
+.print img { display: block; width: auto; max-width: none; height: var(--h); box-shadow: 0 14px 30px -20px rgb(47 79 111 / .55); transition: transform .4s ease, box-shadow .4s ease; }
+.print:hover img { transform: translateY(-8px) rotate(calc(var(--tilt) * -1)); box-shadow: 0 22px 36px -22px rgb(47 79 111 / .6); }
+@keyframes drift-strip { from { transform: translateX(0); } to { transform: translateX(calc(-100% + 100vw)); } }
+@keyframes print-sway { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+@supports not (animation-timeline: view()) {
+  .drift { height: auto; }
+  .drift-view { position: static; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10vh 0; }
+  .drift-track { animation: none; }
+  .print { scroll-snap-align: center; }
+}
 
 /* 404 */
 .lost { display: grid; justify-items: center; text-align: center; padding: 30px 0 20px; }
@@ -212,10 +214,7 @@ a.player-screen:hover p:first-child { text-decoration: underline; }
   .player { left: 50%; top: 100%; translate: -50% 0; width: 150px; }
   .pond-note { right: 4%; bottom: 150%; }
   .about-notes { border-left: 0; border-top: 1px solid var(--border); padding: 25px 0 0; }
-  .anthology-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; }
-  .photo-print { padding: 4px; }
-  .photo-print:nth-child(3n + 2) { margin-top: 0; }
-  .photo-print:nth-child(even) { margin-top: 32px; }
+  .print img { height: calc(var(--h) * .75); }
   .footer-inner { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 35px 24px 22px; gap: 24px; }
   .lost-art text { font-size: 150px; }
 }
@@ -227,4 +226,7 @@ a.player-screen:hover p:first-child { text-decoration: underline; }
   .sleep-marks i:nth-child(2) { transform: translate(12px, -18px); }
   .sleep-marks i:nth-child(3) { transform: translate(24px, -36px); }
   .wind { display: none; }
+  .drift { height: auto; }
+  .drift-view { position: static; height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10vh 0; }
+  .print { scroll-snap-align: center; }
 }
