@@ -49,8 +49,11 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
 .site-header > .signature { font-size: 34px; line-height: 1; text-decoration: none; }
 .navigation { display: flex; gap: 32px; }
 .navigation a { position: relative; display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; text-decoration: none; }
-.navigation a .brushstroke { position: absolute; left: -2px; bottom: 6px; width: calc(100% + 4px); height: 8px; }
-.navigation a:hover { text-decoration: underline; }
+.enso { position: absolute; left: -18px; top: 3px; width: calc(100% + 36px); height: calc(100% - 6px); overflow: visible; pointer-events: none; }
+.enso path { fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .6s ease, opacity .3s; opacity: 0; }
+.enso .enso-dry { stroke-width: .7; transition-delay: .08s; }
+.navigation a:hover .enso path, .navigation a:focus-visible .enso path, .navigation a[aria-current="page"] .enso path { stroke-dashoffset: 0; opacity: .5; }
+.navigation a[aria-current="page"] .enso path { opacity: 1; }
 .menu-toggle { display: none; }
 
 /* Page header */
@@ -226,7 +229,7 @@ a.track:hover p:first-child { text-decoration: underline; }
   .menu-lines { width: 22px; height: 11px; border-top: 1px solid; border-bottom: 1px solid; }
   .navigation { display: none; width: 100%; flex-direction: column; gap: 0; padding-top: 10px; }
   .navigation.is-open { display: flex; }
-  .navigation a .brushstroke { width: 80px; }
+  .navigation a { align-self: flex-start; padding: 0 6px; }
   .hero { grid-template-columns: 1fr 90px; padding: 20px 0 0; }
   .hero-copy { grid-row: 1; grid-column: 1 / -1; padding-top: 110px; }
   .furin-wrap { grid-row: 1; grid-column: 2; width: 80px; margin-top: -24px; }
