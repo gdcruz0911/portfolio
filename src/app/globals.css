@@ -123,10 +123,14 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
 /* Footer */
 .site-footer { margin-top: 40px; background: #285c87; color: #fbf9f3; border-top: 1px solid #234f74; background-image: radial-gradient(ellipse at 75% 100%, #39739a, transparent 70%); }
 .site-footer :focus-visible { outline-color: #ffe1a5; }
-.footer-inner { max-width: 1120px; margin: auto; min-height: 240px; padding: 36px 40px 25px; display: grid; grid-template-columns: 1fr auto; gap: 10px 40px; align-items: center; }
+.footer-inner { max-width: 1120px; margin: auto; min-height: 240px; padding: 36px 40px 25px; display: grid; grid-template-columns: 1fr 220px auto; gap: 10px 40px; align-items: center; }
 .footer-note .signature { font-size: 32px; }
 .footer-note p { font-size: 14px; margin-top: 5px; }
-.footer-note .contact-email { display: inline-block; margin-top: 8px; padding: 8px 0; font-size: 14px; text-decoration: underline; overflow-wrap: anywhere; }
+.pinwheel { justify-self: center; width: 140px; padding: 0; border: 0; background: none; color: inherit; }
+.pinwheel svg { width: 100%; height: auto; overflow: visible; }
+.pinwheel-head, .pinwheel-blades { transform-box: view-box; transform-origin: 80px 80px; }
+.pinwheel-blades { animation: spin 24s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 .site-footer .social-icons { gap: 18px; margin: 0; }
 .site-footer .social-icons svg { width: 24px; height: 24px; }
 .site-footer .social-icons a:nth-child(2) { transform: translateY(-9px); }
