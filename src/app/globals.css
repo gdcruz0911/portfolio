@@ -247,7 +247,7 @@ a.track:hover p:first-child { text-decoration: underline; }
   .otter-rig { margin: 40px 0 60px; }
   .pond-speaker { left: 72%; top: 34%; width: 28%; }
   .pond-speaker > div { position: absolute; top: 100%; right: 0; width: 60vw; display: flex; justify-content: flex-end; margin-top: 8px; }
-  .home-photos { grid-template-columns: 1fr; }
+  .home-photos { grid-template-columns: minmax(0, 1fr); }
   .pile-notes { display: none; }
   .print-pile { height: 250px; }
   .print-pile img { width: 130px; }

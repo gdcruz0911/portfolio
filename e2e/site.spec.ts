@@ -41,6 +41,14 @@ test.describe("navigation", () => {
     expect(await opacity("projects")).toBe("0");
   });
 
+  test("no page scrolls sideways on a phone", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    for (const path of ["/", "/projects", "/about", "/gallery", "/nope"]) {
+      await page.goto(path, { waitUntil: "networkidle" });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth), path).toBeLessThanOrEqual(390);
+    }
+  });
+
   test("mobile menu opens and closes", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/", { waitUntil: "networkidle" });
