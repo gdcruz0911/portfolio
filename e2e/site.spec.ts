@@ -81,6 +81,11 @@ test.describe("navigation", () => {
 });
 
 test.describe("home", () => {
+  test("the hero spells out the full name", async ({ page }) => {
+    await page.goto("/", { waitUntil: "networkidle" });
+    await expect(page.locator(".hero")).toContainText("jean gabriel dela cruz");
+  });
+
   test("the otter pond comes before work", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
     const pond = await page.locator(".pond").boundingBox();
@@ -177,10 +182,12 @@ test.describe("ambient motion", () => {
     expect(await sparksAdded(page, "svg.spark.is-gold")).toBe(1);
   });
 
-  test("the pinwheel gives a gold spark", async ({ page }) => {
+  test("the pinwheel gives a gold spark and a gust that blows away", async ({ page }) => {
     await page.goto("/about", { waitUntil: "networkidle" });
     await page.getByRole("button", { name: "spin the pinwheel" }).click();
     expect(await sparksAdded(page, "svg.spark.is-gold")).toBe(1);
+    await expect(page.locator("#contact .gust")).toHaveCount(1);
+    await expect(page.locator("#contact .gust")).toHaveCount(0, { timeout: 5000 });
   });
 
   test("reduced motion turns sparks and wind off", async ({ page }) => {
