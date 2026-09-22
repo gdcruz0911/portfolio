@@ -3,12 +3,21 @@
 ## Run and check
 
 ```sh
-npm run dev
-npm run lint
-node scripts/check-portfolio.cjs
-npm run test:e2e
-npm run build
+npm run dev        # local site
+npm run check      # lint, types, Spotify unit check
+npm run test:e2e   # production build + Playwright
 ```
+
+## Workflow
+
+Every change ships the same way:
+
+1. Branch from `main`: `feat/…`, `fix/…`, `chore/…`, `docs/…`.
+2. Commit in small conventional commits (`feat(scope): …`), no AI co-author lines.
+3. Before pushing, run `npm run check` and `npm run test:e2e`. New behavior gets an E2E test.
+4. Push and open a PR into `main`. CI (`checks`) must pass; review the Vercel preview on desktop and phone.
+5. Rebase-merge. Vercel deploys `main` to production; the branch auto-deletes.
+6. Rollback: promote the previous deployment in Vercel, then `git revert` through a PR.
 
 ## Spotify
 
