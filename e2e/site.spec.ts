@@ -88,6 +88,18 @@ test.describe("home", () => {
     expect(pond!.y).toBeLessThan(work!.y);
   });
 
+  test("furin and pinwheel say they can be played with", async ({ page }) => {
+    await page.goto("/", { waitUntil: "networkidle" });
+    await expect(page.locator(".furin-wrap")).toContainText("ring me");
+    await expect(page.locator(".pinwheel-wrap")).toContainText("give it a spin");
+  });
+
+  test("the print pile opens the gallery", async ({ page }) => {
+    await page.goto("/", { waitUntil: "networkidle" });
+    await page.getByRole("link", { name: "open the gallery" }).click();
+    await expect(page).toHaveURL("/gallery");
+  });
+
   test("work tiles link to their project entry", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
     const tiles = page.locator(".project-tile");
@@ -131,19 +143,19 @@ test.describe("home", () => {
     await expect(page.locator(".pond-count")).toHaveText("1/8");
   });
 
-  test("earbud wire ends at the current track", async ({ page }) => {
+  test("the speaker shows the current track", async ({ page }) => {
     await page.unrouteAll();
     await mockSpotify(page, { track });
     await page.goto("/", { waitUntil: "networkidle" });
     const label = page.getByRole("link", { name: /now playing: Test Track by Test Artist/ });
     await expect(label).toHaveAttribute("href", track.url);
-    await expect(page.locator(".now-playing .note")).toHaveCount(2);
+    await expect(page.locator(".speaker-notes .note")).toHaveCount(2);
   });
 
-  test("earbud line is quiet when nothing plays", async ({ page }) => {
+  test("the speaker is quiet when nothing plays", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
-    await expect(page.locator(".now-playing")).toContainText("quiet for now");
-    await expect(page.locator(".now-playing .note")).toHaveCount(0);
+    await expect(page.locator(".pond-speaker")).toContainText("quiet for now");
+    await expect(page.locator(".speaker-notes .note")).toHaveCount(0);
   });
 });
 
@@ -195,6 +207,9 @@ test.describe("gallery", () => {
     for (const alt of await photos.evaluateAll((imgs) => imgs.map((img) => img.getAttribute("alt")))) expect(alt).toBeTruthy();
     await expect(page.locator("main dialog, main button")).toHaveCount(0);
     await expect(page.locator("main")).not.toContainText("photographs");
+    const captions = page.locator(".print figcaption");
+    await expect(captions).toHaveCount(6);
+    await expect(captions.first()).toContainText("No.01");
   });
 
   test("scrolling down drifts the strip sideways", async ({ page }) => {
