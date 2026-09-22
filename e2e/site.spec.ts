@@ -47,7 +47,7 @@ test.describe("navigation", () => {
   test("/contact redirects to the footer", async ({ page }) => {
     await page.goto("/contact");
     await expect(page).toHaveURL("/#contact");
-    await expect(page.getByRole("heading", { name: "say hello" })).toBeVisible();
+    await expect(page.locator("#contact").getByRole("link", { name: "jgdcruz1179@gmail.com" })).toBeVisible();
   });
 
   test("unknown routes show the overgrown 404", async ({ page }) => {
@@ -103,19 +103,19 @@ test.describe("home", () => {
     await expect(page.locator(".pond-count")).toHaveText("1/8");
   });
 
-  test("speaker shows the current track", async ({ page }) => {
+  test("earbud player shows the current track", async ({ page }) => {
     await page.unrouteAll();
     await mockSpotify(page, { track });
     await page.goto("/");
     const label = page.getByRole("link", { name: /now playing: Test Track by Test Artist/ });
     await expect(label).toHaveAttribute("href", track.url);
-    await expect(page.locator(".speaker .note")).toHaveCount(2);
+    await expect(page.locator(".player .note")).toHaveCount(2);
   });
 
-  test("speaker is quiet when nothing plays", async ({ page }) => {
+  test("earbud player is quiet when nothing plays", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator(".speaker")).toContainText("quiet for now");
-    await expect(page.locator(".speaker .note")).toHaveCount(0);
+    await expect(page.locator(".player")).toContainText("quiet for now");
+    await expect(page.locator(".player .note")).toHaveCount(0);
   });
 });
 

@@ -41,21 +41,17 @@ export function NowPlaying() {
     </div>
   </>;
 
-  return <div className="speaker">
-    <svg viewBox="0 0 150 150" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-      {track && <><g className="note"><path d="M92 30 v-14 l8 -3" /><ellipse cx="89" cy="31" rx="3.5" ry="2.5" fill="currentColor" /></g><g className="note"><path d="M58 26 v-12 l7 -2" /><ellipse cx="55" cy="27" rx="3.5" ry="2.5" fill="currentColor" /></g></>}
-      <rect x="45" y="40" width="60" height="68" rx="6" />
-      <circle cx="75" cy="82" r="16" />
-      <circle cx="75" cy="82" r="6" />
-      <circle cx="75" cy="53" r="4" />
-      <path d="M50 108 v4 M100 108 v4" />
-      <path d="M18 138 C 20 118, 44 110, 75 111 C 108 112, 132 118, 133 138 C 110 144, 42 144, 18 138 Z" />
-      <path d="M40 126 c 10 -4 22 -5 32 -4" opacity=".5" />
-    </svg>
+  // A little media player at the end of the otter's earbud wire; its screen is the now-playing card.
+  return <div className="player">
+    {track && <svg className="player-notes" viewBox="0 0 60 40" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+      <g className="note"><path d="M40 30 v-14 l8 -3" /><ellipse cx="37" cy="31" rx="3.5" ry="2.5" fill="currentColor" /></g>
+      <g className="note"><path d="M16 26 v-12 l7 -2" /><ellipse cx="13" cy="27" rx="3.5" ry="2.5" fill="currentColor" /></g>
+    </svg>}
     <div aria-live="polite" aria-atomic="true">
       {track?.url
-        ? <a className="track-label" href={track.url} target="_blank" rel="noreferrer noopener" aria-label={`now playing: ${track.title} by ${track.artist}, open in Spotify`}>{details}</a>
-        : <div className="track-label">{details}</div>}
+        ? <a className="player-screen" href={track.url} target="_blank" rel="noreferrer noopener" aria-label={`now playing: ${track.title} by ${track.artist}, open in Spotify`}>{details}</a>
+        : <div className="player-screen">{details}</div>}
     </div>
+    <span className="player-wheel" aria-hidden />
   </div>;
 }

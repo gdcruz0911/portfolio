@@ -84,34 +84,43 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
 .project-tile h3 { font-size: 22px; margin: 16px 0 4px; }
 .project-tile:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
 
-/* Home: otter pond */
-.pond { display: grid; grid-template-columns: 1fr 220px; align-items: end; gap: 30px; }
-.pond-stage { position: relative; min-height: 300px; display: grid; place-items: center; }
-.pond-note { position: absolute; top: 0; left: 4%; display: flex; align-items: flex-end; gap: 4px; font-size: 24px; line-height: 1.1; }
-.pond-note svg { width: 44px; height: 44px; transform: translateY(18px); }
-.otter { position: relative; width: min(100%, 360px); padding: 0; border: 0; background: none; }
-.otter img { width: 100%; height: auto; animation: float 5s ease-in-out infinite; }
-.otter.is-awake img { animation: bob .6s ease-in-out 2; }
-.sleep-marks { position: absolute; left: 22%; top: 0; width: 50px; height: 65px; pointer-events: none; }
+/* Home: otter pond. Everything in .otter-rig shares one 1000x440 box so the wire lines up. */
+.otter-rig { position: relative; container-type: inline-size; width: min(100%, 900px); aspect-ratio: 1000 / 440; margin: 110px auto 0; color: var(--foreground); }
+.otter { position: absolute; left: 0; top: 20.45%; width: 70%; padding: 0; border: 0; background: none; }
+.otter img { display: block; width: 100%; height: auto; }
+/* The image, wire, and player float in sync; the button's own box stays still. */
+.otter img, .earbuds, .player { animation: float 5s ease-in-out infinite; }
+.is-awake .otter img, .is-awake .earbuds, .is-awake .player { animation: bob .6s ease-in-out 2; }
+.earbuds { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.earbuds .bud { fill: var(--surface); }
+.wire-narrow { display: none; }
+.sleep-marks { position: absolute; left: 16%; top: -12%; width: 50px; height: 65px; pointer-events: none; }
 .sleep-marks i { position: absolute; bottom: 0; left: 0; font-family: var(--font-signature), cursive; font-size: 24px; font-style: normal; opacity: 0; animation: sleepy-z 3.6s ease-out infinite; }
 .sleep-marks i:nth-child(2) { animation-delay: 1.2s; }
 .sleep-marks i:nth-child(3) { animation-delay: 2.4s; }
 .is-awake .sleep-marks { visibility: hidden; }
-.otter-bubble { position: absolute; top: 40px; right: 2%; max-width: 240px; padding: 12px 16px; border: 1px solid var(--foreground); border-radius: 16px 16px 16px 4px; background: var(--surface); font-size: 15px; line-height: 1.45; }
-.pond-count { position: absolute; bottom: 0; right: 0; }
-@keyframes float { 50% { transform: translateY(-5px) rotate(2deg); } }
-@keyframes bob { 50% { transform: translateY(-14px) rotate(-3deg); } }
+.pond-note { position: absolute; right: 38%; bottom: 84%; display: flex; align-items: flex-end; gap: 4px; font-size: 24px; line-height: 1.1; }
+.pond-note svg { width: 44px; height: 44px; transform: translateY(24px); order: -1; }
+.otter-bubble { position: absolute; left: 6%; bottom: 82%; width: max-content; max-width: min(250px, 70%); padding: 10px 16px; border: 1px solid var(--foreground); border-radius: 16px 16px 16px 4px; background: var(--surface); font-size: 15px; line-height: 1.45; text-wrap: pretty; z-index: 1; }
+.pond-count { position: absolute; left: 0; top: 100%; margin-top: 8px; }
+@keyframes float { 50% { transform: translateY(-4px); } }
+@keyframes bob { 50% { transform: translateY(-12px); } }
 @keyframes sleepy-z { 0% { opacity: 0; transform: translate(0, 0) scale(.7); } 25% { opacity: .8; } 100% { opacity: 0; transform: translate(18px, -55px) scale(1.2); } }
 
-.speaker { display: grid; justify-items: center; gap: 14px; text-align: center; }
-.speaker svg { width: 150px; height: auto; overflow: visible; }
-.speaker .note { opacity: 0; animation: note-rise 3s ease-out infinite; }
-.speaker .note:nth-of-type(2) { animation-delay: 1.5s; }
+.player { position: absolute; left: 77.2%; top: 36%; width: max(140px, 16cqw); display: grid; justify-items: center; gap: 14px; padding: 12px 12px 16px; border: 2px solid var(--foreground); border-radius: 18px; background: var(--surface); }
+.player > div { width: 100%; }
+.player-screen { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 6px; width: 100%; min-height: 96px; padding: 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--background); text-align: left; text-decoration: none; }
+.player-screen img { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 3px; object-fit: cover; }
+.player-screen div { min-width: 0; }
+.player-screen p { font-size: 13px; line-height: 1.3; overflow-wrap: anywhere; }
+.player-screen .mono { font-size: 11px; }
+a.player-screen:hover p:first-child { text-decoration: underline; }
+.player-wheel { position: relative; width: 58px; height: 58px; border: 1.5px solid var(--foreground); border-radius: 50%; }
+.player-wheel::after { content: ""; position: absolute; inset: 18px; border: 1.5px solid var(--foreground); border-radius: 50%; }
+.player-notes { position: absolute; bottom: 100%; left: 20%; width: 60px; height: 40px; overflow: visible; }
+.player-notes .note { opacity: 0; animation: note-rise 3s ease-out infinite; }
+.player-notes .note:nth-of-type(2) { animation-delay: 1.5s; }
 @keyframes note-rise { 0% { opacity: 0; transform: translate(0, 0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(10px, -28px); } }
-.track-label { display: flex; align-items: center; gap: 10px; max-width: 220px; text-align: left; text-decoration: none; }
-.track-label img { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 3px; object-fit: cover; }
-.track-label p { font-size: 14px; line-height: 1.3; overflow-wrap: anywhere; }
-a.track-label:hover p:first-child { text-decoration: underline; }
 
 .home-photo { display: grid; grid-template-columns: minmax(0, 280px) 1fr; align-items: end; gap: 32px; }
 .home-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; }
@@ -197,9 +206,11 @@ a.track-label:hover p:first-child { text-decoration: underline; }
   .hero-copy p { font-size: 18px; }
   .work-grid, .home-photo, .about-spread { grid-template-columns: 1fr; gap: 32px; }
   .home-photo img { width: 70%; }
-  .pond { grid-template-columns: 1fr; }
-  .pond-stage { min-height: 340px; }
-  .otter-bubble { top: 50px; right: 0; max-width: 200px; }
+  .otter-rig { margin: 120px 0 270px; }
+  .wire-wide { display: none; }
+  .wire-narrow { display: inline; }
+  .player { left: 50%; top: 100%; translate: -50% 0; width: 150px; }
+  .pond-note { right: 4%; bottom: 150%; }
   .about-notes { border-left: 0; border-top: 1px solid var(--border); padding: 25px 0 0; }
   .anthology-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; }
   .photo-print { padding: 4px; }
