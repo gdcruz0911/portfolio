@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Caveat } from "next/font/google";
+import { Fraunces, DM_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/MotionProvider";
 import { personalInfo } from "@/data/content";
 
-const inter = Inter({
+const bodyFont = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-body",
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
+const displayFont = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["400", "500", "600", "700"],
@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${signature.variable}`}>
+    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${signature.variable}`}>
       <body>
         <MotionProvider>
           <a href="#main-content" className="skip-link">skip to content</a>

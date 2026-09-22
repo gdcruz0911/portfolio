@@ -19,6 +19,13 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "mahjong club at uva",
+    description: "a website for the mahjong club at uva, with meeting information and club updates. officers can propose content changes through Google Sheets, with reviewed updates published through GitHub Pages.",
+    tech: ["Next.js", "React", "TypeScript", "Python", "GitHub Pages"],
+    demo: "https://mahjongclub-uva.github.io/mahjongclub-site/",
+    github: "https://github.com/mahjongclub-uva/mahjongclub-site",
+  },
+  {
     title: "personal portfolio",
     description: "a home for my projects, photographs, and a little of what i enjoy. built with responsive layouts, a Spotify now-playing widget, and a sleeping otter.",
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
