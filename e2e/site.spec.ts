@@ -187,6 +187,8 @@ test.describe("home", () => {
   test("the speaker is quiet when nothing plays", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
     await expect(page.locator(".pond-speaker")).toContainText("quiet for now");
+    await expect(page.locator(".pond-speaker .spotify-credit")).toBeVisible();
+    await expect(page.locator(".pond-speaker .spotify-credit")).toHaveText("via spotify");
     await expect(page.locator(".speaker-notes .note")).toHaveCount(0);
   });
 });
