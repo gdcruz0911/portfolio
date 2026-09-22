@@ -58,7 +58,12 @@ export function OtterPond({ children }: { children: React.ReactNode }) {
       <p className="pond-note signature" aria-hidden>poke the otter
         <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M38 6 C 24 8, 14 18, 12 36 M20 30 l-8 7 l-5 -9" /></svg>
       </p>
-      {fact && <p className="otter-bubble" aria-hidden>{fact}</p>}
+      {fact && <p key={found} className="otter-bubble" aria-hidden>
+        <svg className="bubble-shape" viewBox="0 0 200 92" preserveAspectRatio="none">
+          <path vectorEffect="non-scaling-stroke" d="M9 12 C 50 5, 150 7, 191 11 C 197 32, 196 56, 190 70 C 150 76, 70 74, 36 72 L 14 90 L 22 70 C 12 67, 5 52, 6 32 C 6 22, 7 16, 9 12 Z" />
+        </svg>
+        <span>{fact}</span>
+      </p>}
       <button type="button" className="otter" data-sparks="gold" onClick={poke} aria-label="poke the otter for a fact about gabriel">
         <Image src="/art/sleeping-otter.webp" alt="" width={700} height={307} sizes="(max-width: 760px) 70vw, 630px" />
         <span className="sleep-marks" aria-hidden><i>z</i><i>z</i><i>z</i></span>
