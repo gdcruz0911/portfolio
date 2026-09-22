@@ -70,6 +70,8 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
 .furin-wrap { position: relative; justify-self: end; width: 150px; margin-top: -40px; }
 .furin { display: block; width: 100%; padding: 0; border: 0; background: none; color: var(--foreground); transform-origin: 50% 0; animation: sway 7s ease-in-out infinite; }
 .furin svg { width: 100%; height: auto; overflow: visible; }
+.furin .glint { opacity: 0; }
+.furin .glint line { stroke: var(--gold); stroke-width: 1.8; }
 .furin .tanzaku { transform-box: fill-box; transform-origin: 50% 0; animation: flutter 3.5s ease-in-out infinite; }
 @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 @keyframes flutter { 0%, 100% { transform: rotate(4deg); } 50% { transform: rotate(-6deg); } }

@@ -185,6 +185,13 @@ test.describe("ambient motion", () => {
     expect(await sparksAdded(page)).toBe(1);
   });
 
+  test("ringing the furin glints where the clapper hits the glass", async ({ page }) => {
+    await page.goto("/", { waitUntil: "networkidle" });
+    await page.getByRole("button", { name: "ring the wind chime" }).click({ force: true });
+    await expect(page.locator(".furin .glint")).not.toHaveCount(0);
+    await expect(page.locator(".furin .glint")).toHaveCount(0, { timeout: 4000 });
+  });
+
   test("the otter gives a gold spark", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
     await page.getByRole("button", { name: /poke the otter/ }).click();
