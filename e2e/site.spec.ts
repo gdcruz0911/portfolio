@@ -33,6 +33,14 @@ test.describe("navigation", () => {
     await expect(page).toHaveURL("/");
   });
 
+  test("the current page is circled; the others aren't", async ({ page }) => {
+    await page.goto("/about", { waitUntil: "networkidle" });
+    const nav = page.getByRole("navigation", { name: "main navigation" });
+    const opacity = (name: string) => nav.getByRole("link", { name, exact: true }).locator(".enso path").first().evaluate((el) => getComputedStyle(el).opacity);
+    await expect.poll(() => opacity("about")).toBe("1");
+    expect(await opacity("projects")).toBe("0");
+  });
+
   test("mobile menu opens and closes", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/", { waitUntil: "networkidle" });
