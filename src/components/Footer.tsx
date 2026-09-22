@@ -4,8 +4,9 @@ import { personalInfo, socialLinks } from "@/data/content";
 export function Footer() {
   return <footer id="contact" className="site-footer">
     <div className="footer-inner">
-      <div>
-        <h2>say hello</h2>
+      <div className="footer-note">
+        <span className="signature">thanks for stopping by</span>
+        <p>see you around.</p>
         <a href={socialLinks.email} className="contact-email">{personalInfo.email}</a>
       </div>
       <SocialIcons />
