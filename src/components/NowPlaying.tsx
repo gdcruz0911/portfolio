@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { NowPlayingTrack } from "@/data/content";
 
@@ -34,24 +33,20 @@ export function NowPlaying() {
   }, []);
 
   const details = <>
-    {track?.albumImage && <Image src={track.albumImage} alt="" width={80} height={80} />}
-    <div>
-      <p>{track?.title ?? "quiet for now"}</p>
-      <p className="mono">{track?.artist ?? "nothing playing"}</p>
-    </div>
+    <p>♪ {track?.title ?? "quiet for now"}</p>
+    <p className="mono">{track?.artist ?? "nothing playing"}</p>
   </>;
 
-  // A little media player at the end of the otter's earbud wire; its screen is the now-playing card.
-  return <div className="player">
-    {track && <svg className="player-notes" viewBox="0 0 60 40" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+  // A quiet line where the otter's earbud wire ends.
+  return <div className="now-playing">
+    {track && <svg className="now-playing-notes" viewBox="0 0 60 40" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
       <g className="note"><path d="M40 30 v-14 l8 -3" /><ellipse cx="37" cy="31" rx="3.5" ry="2.5" fill="currentColor" /></g>
       <g className="note"><path d="M16 26 v-12 l7 -2" /><ellipse cx="13" cy="27" rx="3.5" ry="2.5" fill="currentColor" /></g>
     </svg>}
     <div aria-live="polite" aria-atomic="true">
       {track?.url
-        ? <a className="player-screen" href={track.url} target="_blank" rel="noreferrer noopener" aria-label={`now playing: ${track.title} by ${track.artist}, open in Spotify`}>{details}</a>
-        : <div className="player-screen">{details}</div>}
+        ? <a href={track.url} target="_blank" rel="noreferrer noopener" aria-label={`now playing: ${track.title} by ${track.artist}, open in Spotify`}>{details}</a>
+        : details}
     </div>
-    <span className="player-wheel" aria-hidden />
   </div>;
 }

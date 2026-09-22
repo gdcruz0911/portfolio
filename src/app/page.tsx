@@ -19,6 +19,8 @@ export default function Home() {
       <Furin />
     </header>
 
+    <OtterPond><NowPlaying /></OtterPond>
+
     <section className="home-section" aria-labelledby="work-title">
       <div className="section-head"><h2 id="work-title">work</h2><Link className="text-link" href="/projects">all projects →</Link></div>
       <div className="work-grid">
@@ -29,8 +31,6 @@ export default function Home() {
         </Link>)}
       </div>
     </section>
-
-    <OtterPond><NowPlaying /></OtterPond>
 
     <section className="home-section home-photo" aria-labelledby="photo-title">
       <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width: 760px) 90vw, 360px" />

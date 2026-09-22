@@ -63,18 +63,24 @@ export function OtterPond({ children }: { children: React.ReactNode }) {
         <Image src="/art/sleeping-otter.webp" alt="" width={700} height={307} sizes="(max-width: 760px) 70vw, 630px" />
         <span className="sleep-marks" aria-hidden><i>z</i><i>z</i><i>z</i></span>
       </button>
-      {/* Earbuds sit on the otter's ears (rig units: otter image drawn at 0,90 at 700x307). */}
-      <svg className="earbuds" viewBox="0 0 1000 440" aria-hidden fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-        <path className="wire" d="M38 202 C 60 240, 120 252, 170 247 S 228 241, 240 240" />
-        <path className="wire" d="M194 128 C 206 170, 232 200, 240 240" />
-        <path className="wire wire-wide" d="M240 240 C 320 280, 380 420, 540 412 S 700 300, 772 290" />
-        <path className="wire wire-narrow" d="M240 240 C 330 300, 470 330, 500 440" />
-        <rect className="bud" x="29" y="180" width="9" height="24" rx="4.5" transform="rotate(-22 33 180)" />
-        <rect className="bud" x="186" y="106" width="9" height="24" rx="4.5" transform="rotate(-18 190 106)" />
-        <circle className="bud" cx="30" cy="177" r="12" />
-        <circle className="bud" cx="185" cy="102" r="12" />
-        <circle cx="30" cy="177" r="4" fill="currentColor" />
-        <circle cx="185" cy="102" r="4" fill="currentColor" />
+      {/* Pencil earbuds on the otter's ears (rig units: otter image drawn at 0,90 at 700x307). */}
+      <svg className="earbuds" viewBox="0 0 1000 440" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+        <defs>
+          <filter id="pencil">
+            <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" result="grain" />
+            <feDisplacementMap in="SourceGraphic" in2="grain" scale="2.2" />
+          </filter>
+        </defs>
+        <g filter="url(#pencil)">
+          <path d="M38 200 C 60 240, 120 252, 170 247 S 228 241, 240 240" />
+          <path d="M193 124 C 206 170, 232 200, 240 240" />
+          <path className="wire-wide" d="M240 240 C 320 280, 380 420, 540 412 S 690 330, 760 318" />
+          <path className="wire-narrow" d="M240 240 C 330 300, 470 330, 500 440" />
+          <rect className="bud" x="29" y="180" width="8" height="21" rx="4" transform="rotate(-22 33 180)" />
+          <rect className="bud" x="186" y="106" width="8" height="21" rx="4" transform="rotate(-18 190 106)" />
+          <circle className="bud" cx="30" cy="177" r="10.5" />
+          <circle className="bud" cx="185" cy="102" r="10.5" />
+        </g>
       </svg>
       {children}
       <p className="pond-count mono">{found}/{otterFacts.length}</p>
