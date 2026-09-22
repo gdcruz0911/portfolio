@@ -1,53 +1,19 @@
-import { ContactSection } from "@/components/ContactSection";
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { personalInfo } from "@/data/content";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: personalInfo.about,
-};
-
-const ACCENT = "#1763a0";
+export const metadata: Metadata = { title: "About", description: personalInfo.about };
 
 export default function AboutPage() {
-  return (
-    <div
-      className="pb-16"
-      style={{ "--accent": ACCENT } as React.CSSProperties}
-    >
-      <PageHeader eyebrow="About" title="A little about me." accent={ACCENT} />
-
-      <section className="max-w-2xl text-lg leading-relaxed text-[var(--foreground)] border-t border-[var(--border)] pt-12">
-        <p>
-          i&rsquo;m currently studying at the university of virginia and
-          spending most of my free time learning the parts of the stack i
-          don&rsquo;t know yet. if you&rsquo;re working on something
-          interesting or just want to chat, my inbox is open.
-        </p>
-      </section>
-
-      <section className="mt-20 grid gap-12 md:grid-cols-3 border-t border-[var(--border)] pt-12">
-        <div>
-          <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)] mb-3">
-            currently
-          </p>
-          <p>studying at the university of virginia</p>
-        </div>
-        <div>
-          <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)] mb-3">
-            building with
-          </p>
-          <p>TypeScript, React, Next.js, Python</p>
-        </div>
-        <div>
-          <p className="text-xs font-medium tracking-[0.18em] text-[var(--muted)] mb-3">
-            off the keyboard
-          </p>
-          <p>cafés, film photography, volleyball</p>
-        </div>
-      </section>
-      <ContactSection />
-    </div>
-  );
+  return <div>
+    <PageHeader title="about" />
+    <section className="about-spread" aria-label="about gabriel">
+      <div className="about-story"><p>i’m gabriel, a student at the university of virginia and an aspiring full-stack developer.</p><p>i spend a lot of my time learning the parts of the stack i don’t know yet, building websites, and finding small ways to make them feel more personal.</p><p>away from the keyboard, you’ll find me café-hopping, taking photographs, or playing volleyball.</p></div>
+      <div className="about-notes">
+        <div><h2 className="mono">currently</h2><p>studying at the university of virginia</p></div>
+        <div><h2 className="mono">building with</h2><p>TypeScript, React, Next.js, Python</p></div>
+        <div><h2 className="mono">a few favorites</h2><p>oolong tea, matcha, cafés, plants, and a good playlist.</p></div>
+      </div>
+    </section>
+  </div>;
 }

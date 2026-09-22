@@ -12,7 +12,8 @@ export interface Project {
   description: string;
   tech: string[];
   demo?: string;
-  walkthrough?: string;
+  preview?: { src: string; width: number; height: number };
+  video?: string;
   poster?: string;
   github?: string;
 }
@@ -20,6 +21,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "mahjong club at uva",
+    preview: { src: "/projects/mahjong.jpg", width: 1400, height: 570 },
     description: "a website for the mahjong club at uva, with meeting information and club updates. officers can propose content changes through Google Sheets, with reviewed updates published through GitHub Pages.",
     tech: ["Next.js", "React", "TypeScript", "Python", "GitHub Pages"],
     demo: "https://mahjongclub-uva.github.io/mahjongclub-site/",
@@ -27,8 +29,9 @@ export const projects: Project[] = [
   },
   {
     title: "personal portfolio",
+    preview: { src: "/projects/portfolio-home.jpg", width: 1400, height: 740 },
     description: "a home for my projects, photographs, and a little of what i enjoy. built with responsive layouts, a Spotify now-playing widget, and a sleeping otter.",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     demo: "/",
     github: "https://github.com/gdcruz0911/portfolio",
   },
@@ -56,36 +59,42 @@ export const gallery: GalleryImage[] = [
   {
     src: "/gallery/4FB0A59E-B4DE-4216-99B7-2AFE168D8942_1_105_c.jpeg",
     alt: "Restaurant patio lit by warm string lights at night",
+    caption: "string lights over a patio, late",
     width: 724,
     height: 1086,
   },
   {
     src: "/gallery/6F809C5E-1824-4049-91DB-FF4794F74F6F_1_105_c.jpeg",
     alt: "Glass high-rise viewed from the street against a blue sky",
+    caption: "glass tower, looking up",
     width: 724,
     height: 1086,
   },
   {
     src: "/gallery/8240FC1B-6D87-4DA9-84F9-2C75FD849F8D_4_5005_c.jpeg",
     alt: "Reflecting pool between pale modern buildings on an overcast day",
+    caption: "a reflecting pool, overcast",
     width: 360,
     height: 540,
   },
   {
     src: "/gallery/85FB701C-4941-440A-A314-C6B566CABDD0_1_105_c.jpeg",
     alt: "Cherry blossoms in bloom",
+    caption: "cherry blossoms, spring",
     width: 724,
     height: 1086,
   },
   {
     src: "/gallery/B39745DA-C0BD-43E7-AED0-3CB064E32E59_4_5005_c.jpeg",
     alt: "Waterfront with small boats and a distant ferris wheel",
+    caption: "harbor, a far-off ferris wheel",
     width: 360,
     height: 450,
   },
   {
     src: "/gallery/DE75A9CC-95B6-4044-88AC-440FC257D8AE_1_105_c.jpeg",
     alt: "Pink roses in warm afternoon sunlight",
+    caption: "roses in afternoon sun",
     width: 724,
     height: 1086,
   },
@@ -96,14 +105,26 @@ export const socialLinks = {
   github: "https://github.com/gdcruz0911",
   linkedin: "https://www.linkedin.com/in/jgdcruz/",
   email: "mailto:jgdcruz1179@gmail.com",
+  resume: "/resume.pdf",
 };
 
 export const navItems = [
-  { href: "/", label: "Home", accent: "#75bce9" },
-  { href: "/projects", label: "Projects", accent: "#75bce9" },
-  { href: "/about", label: "About", accent: "#75bce9" },
-  { href: "/gallery", label: "Gallery", accent: "#75bce9" },
+  { href: "/projects", label: "projects" },
+  { href: "/about", label: "about" },
+  { href: "/gallery", label: "gallery" },
 ] as const;
+
+// Pulled from the about page's notes and interests. The otter hands these out in a shuffled order.
+export const otterFacts: string[] = [
+  "i'm studying at the university of virginia.",
+  "lately i'm building with typescript, react, and next.js.",
+  "python is in the toolbox too.",
+  "oolong tea or matcha, always.",
+  "away from the keyboard, i go café-hopping.",
+  "i take photographs. the gallery has a few.",
+  "you might find me playing volleyball.",
+  "plants and a good playlist make any room better.",
+]
 
 export interface NowPlayingTrack {
   title: string;
@@ -138,3 +159,5 @@ export const interests: string[] = [
   "'How to Pretend' by Lucy Bedroque",
   "cafe-hopping",
 ];
+
+export const projectSlug = (project: Project) => project.title.replaceAll(" ", "-");

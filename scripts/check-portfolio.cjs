@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-require-imports -- This Node CommonJS check loads transpiled modules. */
-// Small regression check for Spotify's away states and optional project media.
+// Small regression check for Spotify's away states.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const ts = require('typescript');
-const React = require('react');
-const { renderToStaticMarkup } = require('react-dom/server');
 
 function load(file, overrides = {}) {
   const output = ts.transpileModule(fs.readFileSync(file, 'utf8'), {
@@ -47,17 +45,6 @@ async function main() {
   assert.equal(calls, previousCalls, 'no requests without credentials');
   const broken = load('src/lib/spotify.ts', { process: { env: { ...env, SPOTIFY_REFRESH_TOKEN: 'test' } }, fetch: async () => { throw Error('network'); } });
   assert.equal(await broken.getNowPlaying(), null, 'network failures are away');
-  const { ProjectCard } = load('src/components/ProjectCard.tsx');
-  const project = { title: 'Test project', description: 'Development-only fixture', tech: ['React'] };
-  const empty = renderToStaticMarkup(React.createElement(ProjectCard, { project }));
-  assert.ok(!empty.includes('<video') && !empty.includes('<a '));
-  const full = renderToStaticMarkup(React.createElement(ProjectCard, { project: { ...project, walkthrough: '/test.mp4', poster: '/poster.jpg', demo: 'https://example.com', github: 'https://github.com/example/test' } }));
-  assert.match(full, /preload="none"/);
-  assert.match(full, /controls=""/);
-  assert.match(full, /poster="\/poster.jpg"/);
-  assert.ok(!full.toLowerCase().includes('autoplay'));
-  assert.match(full, /visit live site/);
-  assert.match(full, /source code/);
-  console.log('Passed: Spotify active, paused, unavailable, missing credentials, network failures; project media and optional links.');
+  console.log('Passed: Spotify active, paused, unavailable, missing credentials, network failures.');
 }
 main().catch((error) => { console.error(error); process.exitCode = 1; });

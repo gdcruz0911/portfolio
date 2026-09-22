@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Source_Serif_4, DM_Sans, Caveat } from "next/font/google";
+import { DM_Mono, DM_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { MotionProvider } from "@/components/MotionProvider";
+import { Sparks } from "@/components/Sparks";
+import { Wind } from "@/components/Wind";
 import { personalInfo } from "@/data/content";
 
 const bodyFont = DM_Sans({
@@ -12,10 +13,10 @@ const bodyFont = DM_Sans({
   display: "swap",
 });
 
-const displayFont = Source_Serif_4({
+const monoFont = DM_Mono({
   subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-mono",
+  weight: ["400"],
   display: "swap",
 });
 
@@ -32,16 +33,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${bodyFont.variable} ${displayFont.variable} ${signature.variable}`}>
+    <html lang="en" className={`${bodyFont.variable} ${monoFont.variable} ${signature.variable}`}>
       <body>
-        <MotionProvider>
           <a href="#main-content" className="skip-link">skip to content</a>
+          <Wind />
+          <Sparks />
           <div className="site-shell">
             <Navigation />
             <main id="main-content" tabIndex={-1}>{children}</main>
           </div>
           <Footer />
-        </MotionProvider>
       </body>
     </html>
   );

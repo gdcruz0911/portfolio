@@ -1,0 +1,13 @@
+import { defineConfig } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "e2e",
+  reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
+  use: { baseURL: "http://localhost:3100" },
+  webServer: {
+    command: "npm run build && npm run start -- -p 3100",
+    url: "http://localhost:3100",
+    reuseExistingServer: false,
+    timeout: 180_000,
+  },
+});
