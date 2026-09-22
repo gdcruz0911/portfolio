@@ -77,6 +77,7 @@ test.describe("navigation", () => {
   test("footer has no email line", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
     await expect(page.locator("#contact")).not.toContainText("@");
+    await expect(page.locator("#contact")).toContainText("crafted with love");
   });
 
   test("unknown routes show the overgrown 404", async ({ page }) => {

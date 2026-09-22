@@ -16,7 +16,12 @@ export function Footer() {
         <Pinwheel />
       </div>
       <SocialIcons />
-      <p className="footer-copyright">© {new Date().getFullYear()} {personalInfo.name.toLowerCase()}</p>
+      <div className="footer-copyright">
+        <p>© {new Date().getFullYear()} {personalInfo.name.toLowerCase()}</p>
+        <p className="crafted">crafted with love
+          <svg viewBox="0 0 24 22" aria-hidden><path d="M12 20 C 6 15, 2 12, 2 7.5 C 2 4.5, 4.4 2.5, 7 2.6 C 9.2 2.7, 10.8 4, 12 6 C 13.3 3.9, 15 2.6, 17.2 2.6 C 19.9 2.7, 22.1 4.8, 22 7.8 C 21.8 12.2, 17.4 15.4, 12 20 Z" /></svg>
+        </p>
+      </div>
     </div>
   </footer>;
 }
