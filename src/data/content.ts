@@ -29,7 +29,7 @@ export const projects: Project[] = [
   },
   {
     title: "personal portfolio",
-    preview: { src: "/projects/portfolio-japandi.jpg", width: 1400, height: 740 },
+    preview: { src: "/projects/portfolio-home.jpg", width: 1400, height: 740 },
     description: "a home for my projects, photographs, and a little of what i enjoy. built with responsive layouts, a Spotify now-playing widget, and a sleeping otter.",
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     demo: "/",
