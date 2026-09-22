@@ -107,17 +107,17 @@ export const navItems = [
   { href: "/gallery", label: "gallery" },
 ] as const;
 
-// TODO: Replace with real facts. The otter hands these out in a shuffled order.
+// Pulled from the about page's notes and interests. The otter hands these out in a shuffled order.
 export const otterFacts: string[] = [
-  "placeholder fact one",
-  "placeholder fact two",
-  "placeholder fact three",
-  "placeholder fact four",
-  "placeholder fact five",
-  "placeholder fact six",
-  "placeholder fact seven",
-  "placeholder fact eight",
-];
+  "i'm studying at the university of virginia.",
+  "lately i'm building with typescript, react, and next.js.",
+  "python is in the toolbox too.",
+  "oolong tea or matcha, always.",
+  "away from the keyboard, i go café-hopping.",
+  "i take photographs. the gallery has a few.",
+  "you might find me playing volleyball.",
+  "plants and a good playlist make any room better.",
+]
 
 export interface NowPlayingTrack {
   title: string;
