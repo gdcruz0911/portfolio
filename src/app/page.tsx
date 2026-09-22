@@ -8,7 +8,7 @@ import { SocialIcons } from "@/components/SocialIcons";
 import { gallery, projectSlug, projects } from "@/data/content";
 
 export default function Home() {
-  const photo = gallery[3];
+  const pile = [3, 5, 1].map((i) => gallery[i]).filter(Boolean);
   return <>
     <header className="hero">
       <div className="hero-copy">
@@ -16,7 +16,12 @@ export default function Home() {
         <p>a student at uva, building websites and finding things worth keeping.</p>
         <SocialIcons />
       </div>
-      <Furin />
+      <div className="furin-wrap">
+        <p className="annotation signature" aria-hidden>ring me
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M6 30 C 14 30, 26 24, 34 10 M26 12 l8 -3 l1 9" /></svg>
+        </p>
+        <Furin />
+      </div>
     </header>
 
     <OtterPond><NowPlaying /></OtterPond>
@@ -32,9 +37,11 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="home-section home-photo" aria-labelledby="photo-title">
-      <Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width: 760px) 90vw, 360px" />
-      <div><h2 id="photo-title" className="sr-only">photographs</h2><Link className="text-link" href="/gallery">gallery →</Link></div>
+    <section className="home-section" aria-labelledby="photos-title">
+      <div className="section-head"><h2 id="photos-title">photos</h2><Link className="text-link" href="/gallery">gallery →</Link></div>
+      <Link href="/gallery" className="print-pile" aria-label="open the gallery">
+        {pile.map((photo) => <Image key={photo.src} src={photo.src} alt="" width={photo.width} height={photo.height} sizes="200px" />)}
+      </Link>
     </section>
   </>;
 }
