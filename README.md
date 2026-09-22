@@ -1,6 +1,6 @@
 # jean gabriel dela cruz · portfolio
 
-A quiet corner of the internet for my projects, photographs, and a sleeping otter. Japandi in spirit: warm paper, one indigo ink, and a few small things to play with.
+A quiet corner of the internet for my projects, photographs, and a sleeping otter.
 
 ## what's inside
 
