@@ -13,6 +13,7 @@ export default function Home() {
     <header className="hero">
       <div className="hero-copy">
         <h1 className="signature">gabriel</h1>
+        <p className="hero-name mono">jean gabriel dela cruz</p>
         <p>a student at uva, building websites and finding things worth keeping.</p>
         <SocialIcons />
       </div>
