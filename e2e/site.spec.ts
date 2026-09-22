@@ -96,6 +96,7 @@ test.describe("home", () => {
 
   test("the print pile opens the gallery", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
+    await expect(page.getByRole("list", { name: "in this pile" })).toContainText("No.04");
     await page.getByRole("link", { name: "open the gallery" }).click();
     await expect(page).toHaveURL("/gallery");
   });

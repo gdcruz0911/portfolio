@@ -8,7 +8,7 @@ import { SocialIcons } from "@/components/SocialIcons";
 import { gallery, projectSlug, projects } from "@/data/content";
 
 export default function Home() {
-  const pile = [3, 5, 1].map((i) => gallery[i]).filter(Boolean);
+  const pile = [3, 5, 1].filter((i) => gallery[i]);
   return <>
     <header className="hero">
       <div className="hero-copy">
@@ -39,9 +39,15 @@ export default function Home() {
 
     <section className="home-section" aria-labelledby="photos-title">
       <div className="section-head"><h2 id="photos-title">photos</h2><Link className="text-link" href="/gallery">gallery →</Link></div>
-      <Link href="/gallery" className="print-pile" aria-label="open the gallery">
-        {pile.map((photo) => <Image key={photo.src} src={photo.src} alt="" width={photo.width} height={photo.height} sizes="200px" />)}
-      </Link>
+      <div className="home-photos">
+        <Link href="/gallery" className="print-pile" aria-label="open the gallery">
+          {pile.map((i) => <Image key={gallery[i].src} src={gallery[i].src} alt="" width={gallery[i].width} height={gallery[i].height} sizes="240px" />)}
+        </Link>
+        <ol className="pile-notes mono" aria-label="in this pile">
+          {pile.map((i) => <li key={i}><b>No.{String(i + 1).padStart(2, "0")}</b> {gallery[i].caption}</li>)}
+          <li>from issue no.01 · {gallery.length} prints</li>
+        </ol>
+      </div>
     </section>
   </>;
 }
