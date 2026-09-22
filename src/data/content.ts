@@ -13,7 +13,7 @@ export interface Project {
   tech: string[];
   demo?: string;
   preview?: { src: string; width: number; height: number };
-  walkthrough?: string;
+  video?: string;
   poster?: string;
   github?: string;
 }
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     title: "personal portfolio",
     preview: { src: "/projects/portfolio.jpg", width: 1400, height: 740 },
     description: "a home for my projects, photographs, and a little of what i enjoy. built with responsive layouts, a Spotify now-playing widget, and a sleeping otter.",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     demo: "/",
     github: "https://github.com/gdcruz0911/portfolio",
   },
@@ -102,11 +102,22 @@ export const socialLinks = {
 };
 
 export const navItems = [
-  { href: "/", label: "Home", accent: "#75bce9" },
-  { href: "/projects", label: "Projects", accent: "#75bce9" },
-  { href: "/about", label: "About", accent: "#75bce9" },
-  { href: "/gallery", label: "Gallery", accent: "#75bce9" },
+  { href: "/projects", label: "projects" },
+  { href: "/about", label: "about" },
+  { href: "/gallery", label: "gallery" },
 ] as const;
+
+// TODO: Replace with real facts. The otter hands these out in a shuffled order.
+export const otterFacts: string[] = [
+  "placeholder fact one",
+  "placeholder fact two",
+  "placeholder fact three",
+  "placeholder fact four",
+  "placeholder fact five",
+  "placeholder fact six",
+  "placeholder fact seven",
+  "placeholder fact eight",
+];
 
 export interface NowPlayingTrack {
   title: string;
@@ -141,3 +152,5 @@ export const interests: string[] = [
   "'How to Pretend' by Lucy Bedroque",
   "cafe-hopping",
 ];
+
+export const projectSlug = (project: Project) => project.title.replaceAll(" ", "-");

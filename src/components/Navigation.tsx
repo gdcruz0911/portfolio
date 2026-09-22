@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Brushstroke } from "@/components/Brushstroke";
 import { navItems, personalInfo } from "@/data/content";
 
 export function Navigation() {
@@ -27,7 +28,7 @@ export function Navigation() {
       <button ref={toggle} type="button" className="menu-toggle" aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>{open ? "close" : "menu"}<span className="menu-lines" aria-hidden /></button>
       <nav id="main-navigation" className={open ? "navigation is-open" : "navigation"} aria-label="main navigation">
         {navItems.map((item) => (
-          <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined} onClick={() => setOpen(false)}>{item.label.toLowerCase()}</Link>
+          <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined} onClick={() => setOpen(false)}>{item.label}{pathname === item.href && <Brushstroke />}</Link>
         ))}
       </nav>
     </header>

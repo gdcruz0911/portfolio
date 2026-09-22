@@ -34,7 +34,7 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
   if (!images.length) return <p className="py-16">photos coming soon.</p>;
 
   return <section className="photo-archive" aria-label="photo gallery">
-    <div className="gallery-controls">
+    <div className="gallery-controls mono">
       <span>{images.length} photographs</span>
     </div>
     <div className="anthology-grid" aria-label="photographs">
@@ -42,7 +42,7 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
         <Image src={image.src} alt={image.alt} width={image.width} height={image.height} sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 32vw" priority={index === 0} />
       </button>)}
     </div>
-    <dialog ref={dialog} className="gallery-dialog" aria-label="photo viewer" onCancel={() => setActiveIdx(null)} onClick={(event) => { if (event.target === event.currentTarget) setActiveIdx(null); }}>
+    <dialog ref={dialog} data-no-sparks className="gallery-dialog" aria-label="photo viewer" onCancel={() => setActiveIdx(null)} onClick={(event) => { if (event.target === event.currentTarget) setActiveIdx(null); }}>
       {active && <div className="photo-viewer">
         <div className="viewer-controls">
           <button type="button" onClick={() => setActiveIdx(null)}>close</button>

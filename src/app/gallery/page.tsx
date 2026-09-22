@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Gallery", description: "Photography.
 
 export default function GalleryPage() {
   return <div>
-    <PageHeader eyebrow="a visual anthology" title="collected moments.">a few things that made me stop and look.</PageHeader>
+    <PageHeader title="gallery" />
     <Gallery images={gallery} />
   </div>;
 }
