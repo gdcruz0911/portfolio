@@ -2,13 +2,16 @@
 
 A quiet corner of the internet for my projects, photographs, and a sleeping otter.
 
+visit [gdcruz.me](https://gdcruz.me)
+
 ## what's inside
 
-- **home**: a furin to ring, an otter to poke for facts about me, a mid-century speaker showing what I'm listening to on Spotify, recent work, and a small pile of prints.
-- **projects**: each one with a screenshot or a silent looping preview.
-- **gallery**: scattered prints that drift sideways as you scroll, with catalog-style captions.
-- **about** and **resume**.
-- little extras: click sparks, wind and leaves on the inner pages, a pinwheel in the footer, and a hand-drawn, overgrown 404.
+- **otter pond**: poke the otter for facts about me, eight in total, shuffled for each visitor
+- **live spotify**: a mid-century speaker by the pond shows what I'm listening to
+- **drifting gallery**: photo prints that float sideways as you scroll, with catalog-style captions
+- **project showcase**: screenshots or silent looping previews, with live demos and github links
+- **small delights**: a furin to ring, a pinwheel that blows a gust of wind, click sparks, and a hand-drawn 404
+- **responsive and gentle**: designed for phones and desktops, and calm for anyone who prefers reduced motion
 
 ## built with
 
