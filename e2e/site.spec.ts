@@ -184,6 +184,36 @@ test.describe("home", () => {
     await expect(page.locator(".speaker-notes .note")).toHaveCount(2);
   });
 
+  test("on phones now playing gets its own block under the pond, with the cover", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.unrouteAll();
+    // Serve the cover from the test so nothing reaches Spotify's CDN.
+    await page.route("**/_next/image**", (route) => route.fulfill({ path: "src/app/apple-icon.png" }));
+    await mockSpotify(page, { track: { ...track, albumImage: "https://i.scdn.co/image/test", title: "A really long song title that keeps going and going", artist: "WEST OF EDEN, keanu., slone, jun.e" } });
+    await page.goto("/", { waitUntil: "networkidle" });
+    await expect(page.locator(".listening-note")).toContainText("what’s he listening to right now?");
+    const row = page.getByRole("link", { name: /now playing: A really long song/ });
+    await expect(row.locator("img")).toBeVisible();
+    await expect(row).toContainText("via spotify");
+    const box = (await row.boundingBox())!;
+    const rig = (await page.locator(".otter-rig").boundingBox())!;
+    expect(box.y, "sits under the otter and speaker").toBeGreaterThanOrEqual(rig.y + rig.height);
+    expect(box.x + box.width, "fits the screen").toBeLessThanOrEqual(390);
+    expect(box.height, "title and artist stay one line each").toBeLessThan(90);
+  });
+
+  test("on desktop long song names stay inside the label", async ({ page }) => {
+    await page.unrouteAll();
+    await mockSpotify(page, { track: { ...track, title: "A really long song title that keeps going and going", artist: "WEST OF EDEN, keanu., slone, jun.e, and many more friends" } });
+    await page.goto("/", { waitUntil: "networkidle" });
+    const label = page.getByRole("link", { name: /now playing: A really long song/ });
+    await expect(label).toHaveAttribute("title", /keeps going and going · WEST OF EDEN/);
+    const speaker = (await page.locator(".pond-speaker").boundingBox())!;
+    const box = (await label.boundingBox())!;
+    expect(box.x + box.width).toBeLessThanOrEqual(speaker.x + speaker.width + 1);
+    expect(box.height).toBeLessThan(90);
+  });
+
   test("the speaker is quiet when nothing plays", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
     await expect(page.locator(".pond-speaker")).toContainText("quiet for now");
