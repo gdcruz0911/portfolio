@@ -125,15 +125,14 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
 .pond-speaker svg { width: min(100%, 220px); height: auto; overflow: visible; }
 .speaker-notes .note { opacity: 0; animation: note-rise 3s ease-out infinite; }
 .speaker-notes .note:nth-of-type(2) { animation-delay: 1.5s; }
-.track { display: flex; align-items: center; gap: 10px; max-width: 100%; text-decoration: none; }
+.track { display: flex; align-items: flex-start; gap: 10px; max-width: 100%; text-decoration: none; }
 .track img { flex: none; width: 40px; height: 40px; border-radius: 3px; object-fit: cover; }
 .track div { min-width: 0; }
 .track p { font-size: 14px; line-height: 1.35; overflow-wrap: anywhere; }
 .track .mono { font-size: 12px; }
 a.track:hover p:first-child { text-decoration: underline; }
-.speaker-label { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
-.spotify-credit { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; }
-.spotify-credit svg { width: 12px; height: 12px; fill: currentColor; }
+.track .spotify-credit { display: flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 11px; }
+.track .spotify-credit svg { width: 12px; height: 12px; fill: currentColor; }
 @keyframes note-rise { 0% { opacity: 0; transform: translate(0, 0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(10px, -28px); } }
 
 .home-photos { display: grid; grid-template-columns: minmax(0, 560px) 1fr; align-items: end; gap: 60px; }
@@ -249,7 +248,8 @@ a.track:hover p:first-child { text-decoration: underline; }
   .work-grid, .about-spread { grid-template-columns: 1fr; gap: 32px; }
   .otter-rig { margin: 40px 0 60px; }
   .pond-speaker { left: 72%; top: 34%; width: 28%; }
-  .speaker-label { position: absolute; top: 100%; right: 0; width: 60vw; align-items: flex-end; margin-top: 8px; }
+  .speaker-label { position: absolute; top: 100%; right: 0; width: 60vw; display: flex; justify-content: flex-end; margin-top: 10px; }
+  .track img { width: 36px; height: 36px; }
   .home-photos { grid-template-columns: minmax(0, 1fr); }
   .pile-notes { display: none; }
   .print-pile { height: 250px; }
