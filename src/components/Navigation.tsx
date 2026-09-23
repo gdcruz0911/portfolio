@@ -24,7 +24,8 @@ export function Navigation() {
 
   return (
     <header className="site-header">
-      <Link href="/" className="signature" aria-label={`${personalInfo.name}, home`} onClick={() => setOpen(false)}>gabriel</Link>
+      {/* The home page already shows the big signature, so the small one only holds its place there. */}
+      <Link href="/" className={pathname === "/" ? "signature is-home" : "signature"} aria-label={`${personalInfo.name}, home`} onClick={() => setOpen(false)}>gabriel</Link>
       <button ref={toggle} type="button" className="menu-toggle" aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>{open ? "close" : "menu"}<span className="menu-lines" aria-hidden /></button>
       <nav id="main-navigation" className={open ? "navigation is-open" : "navigation"} aria-label="main navigation">
         {navItems.map((item) => (

@@ -47,6 +47,7 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
 /* Navigation */
 .site-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 22px 0; }
 .site-header > .signature { font-size: 34px; line-height: 1; text-decoration: none; }
+.site-header > .is-home { visibility: hidden; }
 .navigation { display: flex; gap: 32px; }
 .navigation a { position: relative; display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; text-decoration: none; }
 .enso { position: absolute; left: -18px; top: 3px; width: calc(100% + 36px); height: calc(100% - 6px); overflow: visible; pointer-events: none; }
