@@ -49,6 +49,13 @@ test.describe("navigation", () => {
     }
   });
 
+  test("the small signature is the home link everywhere except home", async ({ page }) => {
+    await page.goto("/", { waitUntil: "networkidle" });
+    await expect(page.getByRole("link", { name: /home$/ })).toBeHidden();
+    await page.goto("/about", { waitUntil: "networkidle" });
+    await expect(page.getByRole("link", { name: /home$/ })).toBeVisible();
+  });
+
   test("mobile menu opens and closes", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/", { waitUntil: "networkidle" });
