@@ -184,6 +184,20 @@ test.describe("home", () => {
     await expect(page.locator(".speaker-notes .note")).toHaveCount(2);
   });
 
+  test("long song names stay inside the speaker's label", async ({ page }) => {
+    for (const width of [1280, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.unrouteAll();
+      await mockSpotify(page, { track: { ...track, title: "A really long song title that keeps going and going", artist: "WEST OF EDEN, keanu., slone, jun.e, and many more friends" } });
+      await page.goto("/", { waitUntil: "networkidle" });
+      const label = page.getByRole("link", { name: /now playing: A really long song/ });
+      await expect(label).toHaveAttribute("title", /keeps going and going · WEST OF EDEN/);
+      const box = (await label.boundingBox())!;
+      expect(box.x + box.width, `label fits at ${width}px`).toBeLessThanOrEqual(width);
+      expect(box.height, `label stays three lines at ${width}px`).toBeLessThan(90);
+    }
+  });
+
   test("the speaker is quiet when nothing plays", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
     await expect(page.locator(".pond-speaker")).toContainText("quiet for now");

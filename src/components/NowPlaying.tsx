@@ -36,8 +36,8 @@ export function NowPlaying() {
   const details = <>
     {track?.albumImage && <Image src={track.albumImage} alt="" width={80} height={80} />}
     <div>
-      <p>{track?.title ?? "quiet for now"}</p>
-      <p className="mono">{track?.artist ?? "nothing playing"}</p>
+      <p className="track-line">{track?.title ?? "quiet for now"}</p>
+      <p className="track-line mono">{track?.artist ?? "nothing playing"}</p>
       <p className="spotify-credit mono">
         <svg viewBox="0 0 24 24" aria-hidden><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z" /></svg>
         via spotify
@@ -47,7 +47,7 @@ export function NowPlaying() {
 
   // A mid-century speaker on a stone by the pond, drawn with the same pencil grain as the otter.
   return <div className="pond-speaker">
-    <svg viewBox="0 0 220 190" aria-hidden>
+    <svg viewBox="0 0 220 236" aria-hidden>
       <defs>
         <filter id="pencil" x="-5%" y="-5%" width="110%" height="110%">
           <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" result="wobble" />
@@ -61,9 +61,11 @@ export function NowPlaying() {
         </pattern>
       </defs>
       <g filter="url(#pencil)" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 172 C 18 152, 64 144, 110 145 C 156 146, 200 153, 206 172 C 170 185, 52 185, 14 172 Z" fill="#c2bbaf" stroke="#8d857a" strokeWidth="1.4" />
-        <path d="M40 166 C 64 158, 100 155, 132 157" fill="none" stroke="#a39b8f" strokeWidth="1" />
-        <path d="M50 124 L58 124 L46 162 L41 162 Z M162 124 L170 124 L179 162 L174 162 Z" fill="#5e3f2b" />
+        <path d="M8 214 q 16 -5 32 0 M176 216 q 16 -5 34 1 M40 226 q 70 10 140 0" fill="none" stroke="#6f93b5" strokeWidth="2.2" />
+        <path d="M26 190 C 22 160, 62 142, 108 142 C 156 142, 196 158, 194 188 C 192 208, 160 216, 110 216 C 60 216, 30 210, 26 190 Z" fill="#b8b1a5" stroke="#857d72" strokeWidth="1.4" />
+        <path d="M46 168 C 62 154, 92 149, 118 150" fill="none" stroke="#d6d0c6" strokeWidth="3" />
+        <path d="M150 186 c 8 4, 14 12, 12 20 M70 196 c 10 -2, 20 2, 26 8" fill="none" stroke="#9a9286" strokeWidth="1" />
+        <path d="M50 124 L58 124 L48 156 L43 156 Z M162 124 L170 124 L177 156 L172 156 Z" fill="#5e3f2b" />
         <rect x="24" y="42" width="172" height="86" rx="9" fill="#9b6541" stroke="#5e3f2b" strokeWidth="1.6" />
         <path d="M30 52 C 60 49, 120 54, 190 50 M30 120 C 70 117, 140 122, 190 118" fill="none" stroke="#7a4d31" strokeWidth=".8" />
         <rect x="36" y="54" width="112" height="62" rx="4" fill="#e7dbc4" stroke="#8a6a4e" strokeWidth="1.1" />
@@ -79,7 +81,7 @@ export function NowPlaying() {
     <div className="speaker-label">
     <div aria-live="polite" aria-atomic="true">
       {track?.url
-        ? <a className="track" href={track.url} target="_blank" rel="noreferrer noopener" aria-label={`now playing: ${track.title} by ${track.artist}, open in Spotify`}>{details}</a>
+        ? <a className="track" title={`${track.title} · ${track.artist}`} href={track.url} target="_blank" rel="noreferrer noopener" aria-label={`now playing: ${track.title} by ${track.artist}, open in Spotify`}>{details}</a>
         : <div className="track">{details}</div>}
     </div>
     </div>
