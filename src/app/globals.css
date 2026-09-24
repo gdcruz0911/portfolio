@@ -8,6 +8,7 @@
   --border: #2f4f6f33;
   --sage: #8fa37e;
   --gold: #d9a441;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 @theme inline {
   --color-background: var(--background);
@@ -66,6 +67,7 @@ h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
 .hero { position: relative; display: grid; grid-template-columns: 1fr 260px; align-items: start; padding-top: 40px; }
 .hero-copy { align-self: center; }
 .hero-copy h1 { font-size: clamp(88px, 13vw, 168px); line-height: .9; }
+.hero-signature svg { display: block; overflow: visible; margin: -.2em 0 -.16em -.02em; }
 .hero-copy p { font-size: 20px; margin: 18px 0 12px; max-width: 420px; }
 .hero-copy .hero-name { margin: 26px 0 0; font-size: 13px; letter-spacing: .08em; }
 .furin-wrap { position: relative; justify-self: end; width: 150px; margin-top: -40px; }
@@ -222,6 +224,26 @@ a.track:hover p:first-child { text-decoration: underline; }
 .lost p { margin-top: 18px; font-size: 18px; }
 .lost .signature { font-size: 26px; }
 
+/* Intro: on the first visit to home each session (html.intro, set before paint), the
+   signature writes itself, the furin draws in, then the rest of the page settles in. */
+.hero-signature .pen { stroke-dasharray: 1; }
+html.intro .hero-signature .pen { animation: pen-write linear both; }
+html.intro .hero-signature .settle { animation: settle .35s ease-out both; }
+html.intro .furin :is(path, circle, rect) { stroke-dasharray: 1; animation: pen-draw .9s var(--ease-out) 1.35s both; }
+html.intro .furin .tanzaku :is(path, circle, rect) { animation-delay: 1.6s; }
+html.intro .furin-wrap .annotation { animation: rise .5s var(--ease-out) 2.1s both; }
+html.intro .furin-wrap .annotation path { stroke-dasharray: 1; animation: pen-draw .5s var(--ease-out) 2.2s both; }
+html.intro .hero-name { animation: rise .5s var(--ease-out) 1.55s both; }
+html.intro .hero-copy > p:not(.hero-name) { animation: rise .5s var(--ease-out) 1.62s both; }
+html.intro .hero-copy .social-icons { animation: rise .5s var(--ease-out) 1.69s both; }
+html.intro .site-header { animation: rise .5s var(--ease-out) 1.76s both; }
+html.intro #main-content > :not(.hero), html.intro .site-footer { animation: rise .6s var(--ease-out) 1.9s both; }
+/* Round caps would show a dot before each line starts, so lines stay hidden until they move. */
+@keyframes pen-write { from { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
+@keyframes pen-draw { from { stroke-dashoffset: 1; fill-opacity: 0; opacity: 0; } 1% { opacity: 1; } to { stroke-dashoffset: 0; fill-opacity: 1; opacity: 1; } }
+@keyframes settle { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
 /* Ambient wind on inner pages */
 .wind { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; color: var(--foreground); }
 .wind > svg { position: absolute; width: 420px; height: auto; opacity: .08; animation: drift linear infinite; }
@@ -276,6 +298,7 @@ a.track:hover p:first-child { text-decoration: underline; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  html.intro .hero { animation: settle .4s ease both !important; }
   .brushstroke path, .lost-art .vine { stroke-dashoffset: 0; }
   .lost-art .leaf { opacity: .9; }
   .sleep-marks i { opacity: .7; }
