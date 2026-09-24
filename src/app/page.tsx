@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Furin } from "@/components/Furin";
+import { HeroSignature } from "@/components/HeroSignature";
 import { NowPlaying } from "@/components/NowPlaying";
 import { OtterPond } from "@/components/OtterPond";
 import { ProjectMedia } from "@/components/ProjectMedia";
@@ -12,14 +13,14 @@ export default function Home() {
   return <>
     <header className="hero">
       <div className="hero-copy">
-        <h1 className="signature">gabriel</h1>
+        <HeroSignature />
         <p className="hero-name mono">jean gabriel dela cruz</p>
         <p>a student at uva, building websites and finding things worth keeping.</p>
         <SocialIcons />
       </div>
       <div className="furin-wrap">
         <p className="annotation signature" aria-hidden>ring me
-          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path d="M6 30 C 14 30, 26 24, 34 10 M26 12 l8 -3 l1 9" /></svg>
+          <svg viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"><path pathLength={1} d="M6 30 C 14 30, 26 24, 34 10 M26 12 l8 -3 l1 9" /></svg>
         </p>
         <Furin />
       </div>
