@@ -22,7 +22,7 @@ const monoFont = DM_Mono({
 
 const signature = Caveat({ subsets: ["latin"], variable: "--font-signature", display: "swap" });
 
-const INTRO_SCRIPT = `try{if(location.pathname==="/"&&!sessionStorage.getItem("intro")){sessionStorage.setItem("intro","1");var r=document.documentElement;r.classList.add("intro");setTimeout(function(){r.classList.remove("intro")},4000)}}catch(e){}`;
+const INTRO_SCRIPT = `try{if(location.pathname==="/"&&!sessionStorage.getItem("intro")){sessionStorage.setItem("intro","1");var r=document.documentElement;r.classList.add("intro");setTimeout(function(){r.classList.remove("intro")},5500)}}catch(e){}`;
 
 export const metadata: Metadata = {
   title: `${personalInfo.name} - ${personalInfo.tagline}`,

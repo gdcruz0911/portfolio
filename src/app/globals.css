@@ -231,18 +231,22 @@ html.intro .hero-signature .pen { animation: pen-write linear both; }
 html.intro .hero-signature .settle { animation: settle .35s ease-out both; }
 html.intro .furin :is(path, circle, rect) { stroke-dasharray: 1; animation: pen-draw .9s var(--ease-out) 1.35s both; }
 html.intro .furin .tanzaku :is(path, circle, rect) { animation-delay: 1.6s; }
-html.intro .furin-wrap .annotation { animation: rise .5s var(--ease-out) 2.1s both; }
-html.intro .furin-wrap .annotation path { stroke-dasharray: 1; animation: pen-draw .5s var(--ease-out) 2.2s both; }
-html.intro .hero-name { animation: rise .5s var(--ease-out) 1.55s both; }
-html.intro .hero-copy > p:not(.hero-name) { animation: rise .5s var(--ease-out) 1.62s both; }
-html.intro .hero-copy .social-icons { animation: rise .5s var(--ease-out) 1.69s both; }
-html.intro .site-header { animation: rise .5s var(--ease-out) 1.76s both; }
-html.intro #main-content > :not(.hero), html.intro .site-footer { animation: rise .6s var(--ease-out) 1.9s both; }
+html.intro .furin-wrap .annotation { animation: rise 1.9s var(--ease-out) 2.3s both; }
+html.intro .furin-wrap .annotation path { stroke-dasharray: 1; animation: pen-draw .7s var(--ease-out) 2.4s both; }
+/* After the signature settles, the rest arrives slowly, one piece at a time. */
+html.intro .hero-name { animation: rise 1.9s var(--ease-out) 1.75s both; }
+html.intro .hero-copy > p:not(.hero-name) { animation: rise 1.9s var(--ease-out) 1.87s both; }
+html.intro .hero-copy .social-icons { animation: rise 1.9s var(--ease-out) 1.99s both; }
+html.intro .site-header { animation: rise 1.9s var(--ease-out) 2.11s both; }
+html.intro #main-content > :not(.hero) { animation: rise 1.9s var(--ease-out) 2.25s both; }
+html.intro #main-content > :nth-child(3) { animation-delay: 2.4s; }
+html.intro #main-content > :nth-child(4) { animation-delay: 2.55s; }
+html.intro .site-footer { animation: rise 1.9s var(--ease-out) 2.7s both; }
 /* Round caps would show a dot before each line starts, so lines stay hidden until they move. */
 @keyframes pen-write { from { stroke-dashoffset: 1; opacity: 0; } 1% { opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
 @keyframes pen-draw { from { stroke-dashoffset: 1; fill-opacity: 0; opacity: 0; } 1% { opacity: 1; } to { stroke-dashoffset: 0; fill-opacity: 1; opacity: 1; } }
 @keyframes settle { from { opacity: 0; } to { opacity: 1; } }
-@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
 /* Ambient wind on inner pages */
 .wind { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; color: var(--foreground); }
