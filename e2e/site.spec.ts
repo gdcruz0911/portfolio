@@ -16,7 +16,55 @@ test.beforeEach(async ({ page }) => {
       if (n instanceof Element && n.matches(".spark")) w.sparks.push(n);
     }))).observe(document, { childList: true, subtree: true });
   });
+  // Skip the handwriting intro everywhere except the tests that are about it.
+  await page.addInitScript(() => sessionStorage.setItem("intro", "1"));
   await mockSpotify(page, { track: null });
+});
+
+// Undoes the skip above once, so the page sees a first visit this session.
+const firstVisit = (page: Page) => page.addInitScript(() => {
+  if (!sessionStorage.getItem("intro-test")) {
+    sessionStorage.setItem("intro-test", "1");
+    sessionStorage.removeItem("intro");
+  }
+});
+const introPlaying = (page: Page) => page.evaluate(() => document.documentElement.classList.contains("intro"));
+const penAnimations = (page: Page) => page.evaluate(() => document.querySelectorAll(".hero-signature .pen")[0].getAnimations().length);
+
+test.describe("intro", () => {
+  test("the first home visit writes the signature, then settles", async ({ page }) => {
+    await firstVisit(page);
+    await page.goto("/");
+    expect(await introPlaying(page)).toBe(true);
+    expect(await penAnimations(page)).toBeGreaterThan(0);
+    await expect(page.getByRole("heading", { level: 1, name: "gabriel" })).toBeVisible();
+    await expect.poll(() => introPlaying(page), { timeout: 6000 }).toBe(false);
+    const settled = page.locator(".hero-signature .settle");
+    expect(await settled.evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
+  });
+
+  test("it plays once per session", async ({ page }) => {
+    await firstVisit(page);
+    await page.goto("/");
+    expect(await introPlaying(page)).toBe(true);
+    await page.reload();
+    expect(await introPlaying(page)).toBe(false);
+  });
+
+  test("it only plays when arriving on home", async ({ page }) => {
+    await firstVisit(page);
+    await page.goto("/about");
+    expect(await introPlaying(page)).toBe(false);
+  });
+
+  test("reduced motion skips the drawing", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await firstVisit(page);
+    await page.goto("/");
+    expect(await penAnimations(page)).toBe(0);
+    const settled = page.locator(".hero-signature .settle");
+    expect(await settled.evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
+  });
 });
 
 test.describe("navigation", () => {
