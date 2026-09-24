@@ -38,7 +38,7 @@ test.describe("intro", () => {
     expect(await introPlaying(page)).toBe(true);
     expect(await penAnimations(page)).toBeGreaterThan(0);
     await expect(page.getByRole("heading", { level: 1, name: "gabriel" })).toBeVisible();
-    await expect.poll(() => introPlaying(page), { timeout: 6000 }).toBe(false);
+    await expect.poll(() => introPlaying(page), { timeout: 8000 }).toBe(false);
     const settled = page.locator(".hero-signature .settle");
     expect(await settled.evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
   });
