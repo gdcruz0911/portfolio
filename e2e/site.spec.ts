@@ -327,6 +327,18 @@ test.describe("ambient motion", () => {
   });
 });
 
+test.describe("about", () => {
+  test("the toolbox shows every tool, grouped, with a name", async ({ page }) => {
+    await page.goto("/about", { waitUntil: "networkidle" });
+    const toolbox = page.getByRole("region", { name: "toolbox" });
+    for (const group of ["languages", "frameworks", "tools"]) await expect(toolbox.getByRole("heading", { name: group })).toBeVisible();
+    for (const tool of ["Python", "Java", "React", "Django", "Git", "AWS"]) await expect(toolbox.getByText(tool, { exact: true })).toBeVisible();
+    await expect(toolbox.locator(".tool")).toHaveCount(15);
+    await expect(toolbox.locator(".tool svg path")).toHaveCount(15);
+    await expect(page.getByText("building with")).toHaveCount(0);
+  });
+});
+
 test.describe("gallery", () => {
   test("shows every photo as a plain print, with nothing to open", async ({ page }) => {
     await page.goto("/gallery", { waitUntil: "networkidle" });
