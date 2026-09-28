@@ -7,7 +7,7 @@ export function Footer() {
     <div className="footer-inner">
       <div className="footer-note">
         <span className="signature">thanks for stopping by</span>
-        <p>see you around.</p>
+        <p><a href={`mailto:${personalInfo.email}`}>say hello →</a></p>
       </div>
       <div className="pinwheel-wrap">
         <p className="annotation signature" aria-hidden>give it a spin

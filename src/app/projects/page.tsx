@@ -7,6 +7,7 @@ import { projects } from "@/data/content";
 export const metadata: Metadata = {
   title: "Projects",
   description: "Selected projects.",
+  alternates: { canonical: "/projects" },
 };
 
 export default function ProjectsPage() {

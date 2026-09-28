@@ -25,8 +25,26 @@ const signature = Caveat({ subsets: ["latin"], variable: "--font-signature", dis
 const INTRO_SCRIPT = `try{if(location.pathname==="/"&&!sessionStorage.getItem("intro")){sessionStorage.setItem("intro","1");var r=document.documentElement;r.classList.add("intro");setTimeout(function(){r.classList.remove("intro")},5500)}}catch(e){}`;
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gdcruz.me"),
   title: `${personalInfo.name} - ${personalInfo.tagline}`,
   description: personalInfo.about,
+  applicationName: "Gabriel Dela Cruz",
+  authors: [{ name: personalInfo.name, url: "https://gdcruz.me" }],
+  creator: personalInfo.name,
+  openGraph: {
+    type: "website",
+    url: "https://gdcruz.me",
+    siteName: "Gabriel Dela Cruz",
+    title: `${personalInfo.name} - ${personalInfo.tagline}`,
+    description: personalInfo.about,
+    images: [{ url: "/projects/portfolio-home.jpg", width: 1400, height: 740, alt: "Gabriel Dela Cruz's portfolio" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${personalInfo.name} - ${personalInfo.tagline}`,
+    description: personalInfo.about,
+    images: ["/projects/portfolio-home.jpg"],
+  },
 };
 
 export default function RootLayout({
