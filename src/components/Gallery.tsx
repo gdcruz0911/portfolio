@@ -59,7 +59,7 @@ function useDrift() {
 
 export function Gallery({ images }: { images: GalleryImage[] }) {
   const { section, track } = useDrift();
-  if (!images.length) return <p className="py-16">photos coming soon.</p>;
+  if (!images.length) return <p style={{ paddingBlock: 64 }}>photos coming soon.</p>;
   return <section ref={section} className="drift">
     <div className="drift-view" role="region" aria-label="photographs, scroll sideways" tabIndex={0}>
       <ul ref={track} className="drift-track">

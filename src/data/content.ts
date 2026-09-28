@@ -1,6 +1,5 @@
 export const personalInfo = {
   name: "Jean Gabriel Dela Cruz",
-  shortName: "Gabriel",
   tagline: "Creating thoughtful digital experiences.",
   about:
     "Hi, I'm Gabriel, a student at the University of Virginia and an aspiring full-stack developer. I want to create software that is not only functional but also delightful to use. I'm always looking for new things to learn and ways to improve. When I'm not coding, you can find me cafe-hopping, experimenting with photography, or playing volleyball.",
@@ -14,7 +13,6 @@ export interface Project {
   demo?: string;
   preview?: { src: string; width: number; height: number };
   video?: string;
-  poster?: string;
   github?: string;
 }
 
@@ -22,6 +20,7 @@ export const projects: Project[] = [
   {
     title: "mahjong club at uva",
     preview: { src: "/projects/mahjong.jpg", width: 1400, height: 570 },
+    video: "/projects/mahjong-preview.webm",
     description: "a website for the mahjong club at uva, with meeting information and club updates. officers can propose content changes through Google Sheets, with reviewed updates published through GitHub Pages.",
     tech: ["Next.js", "React", "TypeScript", "Python", "GitHub Pages"],
     demo: "https://mahjongclub-uva.github.io/mahjongclub-site/",
@@ -30,8 +29,9 @@ export const projects: Project[] = [
   {
     title: "personal portfolio",
     preview: { src: "/projects/portfolio-home.jpg", width: 1400, height: 740 },
+    video: "/projects/portfolio-preview.webm",
     description: "a home for my projects, photographs, and a little of what i enjoy. built with responsive layouts, a Spotify now-playing widget, and a sleeping otter.",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    tech: ["Next.js", "React", "TypeScript", "CSS"],
     demo: "/",
     github: "https://github.com/gdcruz0911/portfolio",
   },
@@ -43,18 +43,8 @@ export interface GalleryImage {
   width: number;
   height: number;
   caption?: string;
-  tags?: string[];
 }
 
-// TODO: Drop images into /public/gallery/ and add entries here.
-// Example:
-// {
-//   src: "/gallery/cafe-01.jpg",
-//   alt: "Espresso cup on marble counter",
-//   width: 1200,
-//   height: 1500,
-//   tags: ["cafe", "fujifilm"],
-// }
 export const gallery: GalleryImage[] = [
   {
     src: "/gallery/4FB0A59E-B4DE-4216-99B7-2AFE168D8942_1_105_c.jpeg",
@@ -130,7 +120,6 @@ export interface NowPlayingTrack {
   title: string;
   artist: string;
   album?: string;
-  albumColor?: string;
   albumImage?: string;
   isPlaying?: boolean;
   url?: string;
@@ -144,20 +133,6 @@ export const awayMessages: string[] = [
   "off the grid right now",
   "currently vibing in silence",
   "choosing my next obsession",
-];
-
-// TODO: Update seasonally. Used in the footer marquee.
-export const interests: string[] = [
-  "volleyball",
-  "SEVENTEEN",
-  "dry malatang",
-  "Persona 3 Reload",
-  "mangoes",
-  "oolong tea",
-  "We Are All Trying Here",
-  "Project Hail Mary",
-  "'How to Pretend' by Lucy Bedroque",
-  "cafe-hopping",
 ];
 
 export const projectSlug = (project: Project) => project.title.replaceAll(" ", "-");
