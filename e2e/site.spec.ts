@@ -328,6 +328,31 @@ test.describe("ambient motion", () => {
 });
 
 test.describe("projects", () => {
+  test("silent previews play only on the projects page while visible", async ({ page }) => {
+    await page.goto("/", { waitUntil: "networkidle" });
+    await expect(page.locator(".project-tile video")).toHaveCount(0);
+
+    await page.goto("/projects", { waitUntil: "networkidle" });
+    const videos = page.locator(".project-feature video");
+    await expect(videos).toHaveCount(2);
+    const first = videos.first();
+    expect(await first.evaluate((element: HTMLVideoElement) => ({ muted: element.muted, loop: element.loop, inline: element.playsInline }))).toEqual({ muted: true, loop: true, inline: true });
+    await expect.poll(() => first.evaluate((element: HTMLVideoElement) => element.paused)).toBe(false);
+
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await expect.poll(() => first.evaluate((element: HTMLVideoElement) => element.paused)).toBe(true);
+    await videos.last().scrollIntoViewIfNeeded();
+    await expect.poll(() => videos.last().evaluate((element: HTMLVideoElement) => element.paused)).toBe(false);
+  });
+
+  test("reduced motion keeps project previews still", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/projects", { waitUntil: "networkidle" });
+    const first = page.locator(".project-feature video").first();
+    await expect(first).toHaveAttribute("poster", "/projects/mahjong.jpg");
+    expect(await first.evaluate((element: HTMLVideoElement) => element.paused)).toBe(true);
+  });
+
   test("the toolbox shows every tool, grouped, with a name", async ({ page }) => {
     await page.goto("/projects", { waitUntil: "networkidle" });
     const toolbox = page.getByRole("region", { name: "toolbox" });

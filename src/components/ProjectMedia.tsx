@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import type { Project } from "@/data/content";
 
 // One media slot per project: a silent looping clip when there is one, otherwise the screenshot.
-export function ProjectMedia({ project, sizes, className }: { project: Project; sizes: string; className?: string }) {
+export function ProjectMedia({ project, sizes, className, playVideo = false }: { project: Project; sizes: string; className?: string; playVideo?: boolean }) {
   const video = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -14,12 +14,12 @@ export function ProjectMedia({ project, sizes, className }: { project: Project; 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) clip.play().catch(() => {});
       else clip.pause();
-    });
+    }, { threshold: 0.25 });
     observer.observe(clip);
     return () => observer.disconnect();
   }, []);
 
-  if (project.video) return <video ref={video} className={className} src={project.video} poster={project.poster ?? project.preview?.src} muted loop playsInline preload="metadata" aria-label={`${project.title} preview`} data-no-sparks />;
+  if (playVideo && project.video) return <video ref={video} className={className} src={project.video} poster={project.preview?.src} muted loop playsInline preload="metadata" aria-label={`${project.title} preview`} data-no-sparks />;
   if (project.preview) return <Image className={className} src={project.preview.src} alt={`${project.title} preview`} width={project.preview.width} height={project.preview.height} sizes={sizes} />;
   return null;
 }

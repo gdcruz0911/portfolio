@@ -15,7 +15,7 @@ visit [gdcruz.me](https://gdcruz.me)
 
 ## built with
 
-Next.js · React · TypeScript · Tailwind CSS · Playwright · Vercel
+Next.js · React · TypeScript · CSS · Playwright · Vercel
 
 ## how it ships
 

@@ -4,7 +4,7 @@ import { projectSlug, type Project } from "@/data/content";
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article id={projectSlug(project)} className="project-feature">
-      <ProjectMedia project={project} className="project-media" sizes="(max-width: 760px) 90vw, 1040px" />
+      <ProjectMedia project={project} className="project-media" sizes="(max-width: 760px) 90vw, 1040px" playVideo />
       <h2>{project.title}</h2>
       <p>{project.description}</p>
       <ul className="mono">{project.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>
