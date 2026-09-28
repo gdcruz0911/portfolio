@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Gallery } from "@/components/Gallery";
 import { gallery } from "@/data/content";
 
-export const metadata: Metadata = { title: "Gallery", description: "Photography." };
+export const metadata: Metadata = { title: "Gallery", description: "Photography.", alternates: { canonical: "/gallery" } };
 
 export default function GalleryPage() {
   return <div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { personalInfo } from "@/data/content";
 
-export const metadata: Metadata = { title: "About", description: personalInfo.about };
+export const metadata: Metadata = { title: "About", description: personalInfo.about, alternates: { canonical: "/about" } };
 
 export default function AboutPage() {
   return <div>

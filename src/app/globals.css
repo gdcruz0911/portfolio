@@ -156,9 +156,8 @@ a.track:hover p:first-child { text-decoration: underline; }
 .print-pile:hover img:nth-child(3) { transform: translateX(14px) rotate(10deg); }
 
 /* Footer */
-.site-footer { position: relative; overflow: hidden; margin-top: 40px; background: #285c87; color: #fbf9f3; border-top: 1px solid #234f74; background-image: radial-gradient(ellipse at 75% 100%, #39739a, transparent 70%); }
-.site-footer :focus-visible { outline-color: #ffe1a5; }
-.footer-inner { max-width: 1120px; margin: auto; min-height: 240px; padding: 36px 40px 25px; display: grid; grid-template-columns: 1fr 220px auto; gap: 10px 40px; align-items: center; }
+.site-footer { position: relative; overflow: hidden; margin-top: 40px; background: var(--surface); color: var(--foreground); border-top: 1px solid var(--border); background-image: radial-gradient(ellipse at 75% 100%, #dfe8d6, transparent 70%); }
+.footer-inner { max-width: 1120px; margin: auto; min-height: 190px; padding: 42px 40px 24px; display: grid; grid-template-columns: 1fr 220px auto; gap: 10px 40px; align-items: center; }
 .footer-note .signature { font-size: 32px; }
 .footer-note p { font-size: 14px; margin-top: 5px; }
 .gust { position: absolute; inset: 0; pointer-events: none; }
